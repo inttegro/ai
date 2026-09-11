@@ -23,7 +23,7 @@ Compatible clients authenticate with OAuth. The service checks the selected orga
 ## Install the Claude plugin
 
 ```bash
-claude plugin marketplace add zebodotdev/ai
+claude plugin marketplace add inttegro/ai
 claude plugin install inttegro@inttegro
 ```
 

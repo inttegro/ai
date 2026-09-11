@@ -9,7 +9,7 @@
       "name": "inttegro",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/zebodotdev/ai.git",
+        "url": "https://github.com/inttegro/ai.git",
         "path": "plugins/inttegro",
         "ref": "main"
       },

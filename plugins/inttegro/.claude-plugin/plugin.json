@@ -10,7 +10,7 @@
     "url": "https://inttegro.com/"
   },
   "homepage": "https://studio.inttegro.com/inttegro-mcp",
-  "repository": "https://github.com/zebodotdev/ai/tree/main/plugins/inttegro",
+  "repository": "https://github.com/inttegro/ai/tree/main/plugins/inttegro",
   "license": "MIT",
   "keywords": [
     "commerce",
