@@ -1,0 +1,23 @@
+{
+  "name": "inttegro",
+  "owner": {
+    "name": "Inttegro",
+    "email": "support@inttegro.com"
+  },
+  "plugins": [
+    {
+      "name": "inttegro",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/zebodotdev/ai.git",
+        "path": "plugins/inttegro",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Business"
+    }
+  ]
+}

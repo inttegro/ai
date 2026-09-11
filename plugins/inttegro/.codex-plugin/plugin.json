@@ -1,0 +1,43 @@
+{
+  "name": "inttegro",
+  "version": "0.1.6",
+  "description": "Operate an Inttegro merchant account from OpenAI with live tools for commerce, contacts, files, reusable messages, confirmed actions, analytics, and portable MCP Apps views.",
+  "author": {
+    "name": "Inttegro",
+    "email": "support@inttegro.com",
+    "url": "https://inttegro.com/"
+  },
+  "homepage": "https://studio.inttegro.com/inttegro-mcp",
+  "repository": "https://github.com/zebodotdev/ai/tree/main/plugins/inttegro",
+  "license": "MIT",
+  "keywords": [
+    "commerce",
+    "merchant",
+    "orders",
+    "analytics",
+    "customers",
+    "buy-links",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Inttegro",
+    "shortDescription": "Run merchant operations with Inttegro",
+    "longDescription": "Understand orders, products, customers, files, balances, payouts, messages, and sales performance; create, preview, publish, archive, and send reusable SMS or email templates; take confirmed payment through masked choices and secure checkout; guide line-item refunds; manage commerce and file lifecycles; or turn SDK and checkout choices into an integration build and test plan.",
+    "developerName": "Inttegro",
+    "category": "Business",
+    "capabilities": ["Analytics", "Interactive", "Write"],
+    "websiteURL": "https://inttegro.com/",
+    "privacyPolicyURL": "https://inttegro.com/privacy",
+    "termsOfServiceURL": "https://inttegro.com/terms",
+    "brandColor": "#16A249",
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo.png",
+    "defaultPrompt": [
+      "Give me today's Inttegro brief and show the key trends.",
+      "Check order 1042 and show its latest status.",
+      "Create a buy link for a product and send it to a customer."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

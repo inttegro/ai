@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "inttegro",
+  "displayName": "Inttegro",
+  "version": "0.1.6",
+  "description": "Operate an Inttegro merchant account from Claude with live Inttegro tools for commerce, contacts, files, reusable messages, confirmed actions, analytics, integration guidance, and reusable workflows.",
+  "author": {
+    "name": "Inttegro",
+    "email": "support@inttegro.com",
+    "url": "https://inttegro.com/"
+  },
+  "homepage": "https://studio.inttegro.com/inttegro-mcp",
+  "repository": "https://github.com/zebodotdev/ai/tree/main/plugins/inttegro",
+  "license": "MIT",
+  "keywords": [
+    "commerce",
+    "merchant",
+    "orders",
+    "analytics",
+    "customers",
+    "buy-links",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

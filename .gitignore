@@ -1,0 +1,10 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.claude/
+.agents/
+.app.json
+node_modules/
+dist/
+coverage/

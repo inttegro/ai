@@ -1,0 +1,31 @@
+{
+  "name": "inttegro",
+  "owner": {
+    "name": "Inttegro",
+    "email": "support@inttegro.com",
+    "url": "https://inttegro.com/"
+  },
+  "description": "Open-source Inttegro plugins for commerce operations and business intelligence.",
+  "plugins": [
+    {
+      "name": "inttegro",
+      "source": "./plugins/inttegro",
+      "displayName": "Inttegro",
+      "description": "Operate an Inttegro merchant account from Claude with live tools, confirmed actions, analytics, and reusable workflows.",
+      "version": "0.1.6",
+      "author": {
+        "name": "Inttegro"
+      },
+      "category": "Business",
+      "tags": [
+        "commerce",
+        "merchant",
+        "orders",
+        "analytics",
+        "customers",
+        "buy-links",
+        "mcp"
+      ]
+    }
+  ]
+}

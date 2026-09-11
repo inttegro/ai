@@ -1,0 +1,25 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate JSON
+        run: find . -name '*.json' -not -path './.git/*' -print0 | xargs -0 -n1 jq empty
+      - name: Validate Claude marketplace
+        run: npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
+      - name: Validate Inttegro plugin
+        run: npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
