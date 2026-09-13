@@ -1,5 +1,7 @@
 # Inttegro AI
 
+[![skills.sh](https://skills.sh/b/inttegro/ai)](https://skills.sh/inttegro/ai)
+
 Open-source tools for bringing Inttegro into AI applications and agent workflows.
 
 This repository is the public home for Inttegro agent plugins, reusable skills, protocol integrations, examples, and libraries that are useful beyond a single product or model provider. Host-specific packages stay thin: business logic, tenant isolation, and authorization policy remain in Inttegro's shared services.
@@ -9,7 +11,7 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 | Project | Description | Status |
 | --- | --- | --- |
 | [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with Inttegro tools, thirteen merchant workflows, two read-only investigators, three action-capable operators, and MCP Apps metadata. | Public source; directory reviews pending |
-| [Standalone skills](skills) | Individually reusable merchant workflows for skills-compatible agents. | Available from source |
+| [Standalone skills](skills) | Individually reusable merchant workflows for skills-compatible agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
 
@@ -22,6 +24,22 @@ https://mcp.inttegro.com/
 ```
 
 Compatible clients authenticate with OAuth. The service checks the selected organization, membership, and granular Inttegro scopes on every request. API keys remain a separate workload credential for headless integrations and should never be pasted into an interactive AI conversation.
+
+## Install Inttegro skills
+
+Install the full Inttegro skill collection with the open-source `skills` CLI:
+
+```bash
+npx skills add inttegro/ai
+```
+
+To install one workflow, select it explicitly:
+
+```bash
+npx skills add inttegro/ai --skill inttegro-order-desk
+```
+
+Browse the complete collection at [skills.sh/inttegro/ai](https://skills.sh/inttegro/ai).
 
 ## Install the Claude plugin
 

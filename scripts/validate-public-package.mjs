@@ -63,6 +63,36 @@ for (const skill of skills) {
   assert(source.includes(`\nname: ${skill}\n`), `${skill}/SKILL.md name must match its directory`);
 }
 
+const skillsPage = await readJson("skills.sh.json");
+assert(
+  skillsPage.$schema === "https://skills.sh/schemas/skills.sh.schema.json",
+  "skills.sh.json must target the skills.sh schema",
+);
+assert(skillsPage.notGrouped === "bottom", "skills.sh.json must place ungrouped skills last");
+assert(
+  Array.isArray(skillsPage.groupings) && skillsPage.groupings.length > 0,
+  "skills.sh.json must define at least one grouping",
+);
+const groupedSkills = skillsPage.groupings.flatMap((group) => {
+  assert(
+    typeof group.title === "string" && group.title.length > 0,
+    "each skills.sh grouping must have a title",
+  );
+  assert(
+    Array.isArray(group.skills) && group.skills.length > 0,
+    `skills.sh grouping ${group.title} must include at least one skill`,
+  );
+  return group.skills;
+});
+assert(
+  new Set(groupedSkills).size === groupedSkills.length,
+  "skills.sh.json must not list a skill in more than one grouping",
+);
+assert(
+  JSON.stringify([...groupedSkills].sort()) === JSON.stringify(skills),
+  "skills.sh.json must group every standalone skill exactly once",
+);
+
 const agents = (await readdir(join(root, "plugins", "inttegro", "agents"), { withFileTypes: true }))
   .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
   .map((entry) => entry.name)

@@ -21,6 +21,23 @@ authenticated Inttegro MCP connection.
 | `inttegro-resolve-customer-case` | Evidence-led customer support and approved resolution |
 | `inttegro-sell-by-link` | Products, prices, hosted buy links, and link delivery |
 
+## Install with the skills CLI
+
+Install the collection:
+
+```bash
+npx skills add inttegro/ai
+```
+
+Install one workflow:
+
+```bash
+npx skills add inttegro/ai --skill inttegro-order-desk
+```
+
+The public catalog is available at
+[skills.sh/inttegro/ai](https://skills.sh/inttegro/ai).
+
 ## Install one skill from a clone
 
 Copy the complete skill directory into a supported project or user skills

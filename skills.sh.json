@@ -1,0 +1,43 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Sell and collect",
+      "description": "Launch offers, create buy links, and recover eligible unpaid orders.",
+      "skills": [
+        "inttegro-launch-offer",
+        "inttegro-sell-by-link",
+        "inttegro-collect-unpaid-orders"
+      ]
+    },
+    {
+      "title": "Orders and support",
+      "description": "Investigate orders and customer cases, take approved action, and close fulfillment.",
+      "skills": [
+        "inttegro-order-desk",
+        "inttegro-payment-refund",
+        "inttegro-fulfill-and-close",
+        "inttegro-customer-care",
+        "inttegro-resolve-customer-case"
+      ]
+    },
+    {
+      "title": "Operations",
+      "description": "Run daily briefs, reconcile money movement, manage templates, and handle files.",
+      "skills": [
+        "inttegro-daily-brief",
+        "inttegro-reconciliation",
+        "inttegro-message-templates",
+        "inttegro-files"
+      ]
+    },
+    {
+      "title": "Build",
+      "description": "Design and validate Inttegro API, SDK, and Checkout integrations.",
+      "skills": [
+        "inttegro-integration-builder"
+      ]
+    }
+  ]
+}
