@@ -55,7 +55,7 @@ const skills = (await readdir(join(root, "skills"), { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .sort();
-assert(skills.length === 9, `expected 9 standalone skills, found ${skills.length}`);
+assert(skills.length === 13, `expected 13 standalone skills, found ${skills.length}`);
 
 for (const skill of skills) {
   const source = await readFile(join(root, "skills", skill, "SKILL.md"), "utf8");
@@ -63,4 +63,27 @@ for (const skill of skills) {
   assert(source.includes(`\nname: ${skill}\n`), `${skill}/SKILL.md name must match its directory`);
 }
 
-console.log(`Validated portable plugin, registry metadata, and ${skills.length} standalone skills.`);
+const agents = (await readdir(join(root, "plugins", "inttegro", "agents"), { withFileTypes: true }))
+  .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+  .map((entry) => entry.name)
+  .sort();
+const requiredAgents = [
+  "commerce-analyst.md",
+  "customer-journey-investigator.md",
+  "customer-resolution-specialist.md",
+  "order-operations-manager.md",
+  "sales-closer.md",
+];
+assert(
+  JSON.stringify(agents) === JSON.stringify(requiredAgents),
+  `expected agent set ${requiredAgents.join(", ")}; found ${agents.join(", ")}`,
+);
+
+for (const agent of agents) {
+  const source = await readFile(join(root, "plugins", "inttegro", "agents", agent), "utf8");
+  const expectedName = agent.slice(0, -3);
+  assert(source.startsWith("---\n"), `${agent} must start with YAML frontmatter`);
+  assert(source.includes(`\nname: ${expectedName}\n`), `${agent} name must match its filename`);
+}
+
+console.log(`Validated portable plugin, registry metadata, ${skills.length} standalone skills, and ${agents.length} agents.`);

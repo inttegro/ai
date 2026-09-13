@@ -7,14 +7,18 @@ authenticated Inttegro MCP connection.
 
 | Skill | Use it for |
 | --- | --- |
+| `inttegro-collect-unpaid-orders` | Unpaid-order queues, approved collection actions, and payment reconciliation |
 | `inttegro-customer-care` | Customer activity, record maintenance, and consented messaging |
 | `inttegro-daily-brief` | Numbers-first operating and sales briefs |
 | `inttegro-files` | Private files and intentional sharing |
+| `inttegro-fulfill-and-close` | Paid-order closeout, completion, and receipt delivery |
 | `inttegro-integration-builder` | API, SDK, Checkout, and integration readiness decisions |
+| `inttegro-launch-offer` | Product, price, publication, and buy-link launches |
 | `inttegro-message-templates` | Reusable SMS and email template lifecycles |
 | `inttegro-order-desk` | Order investigation, creation, invoices, and receipts |
 | `inttegro-payment-refund` | Secure payment selection and line-item refunds |
 | `inttegro-reconciliation` | Balances, payouts, settings, and operational reconciliation |
+| `inttegro-resolve-customer-case` | Evidence-led customer support and approved resolution |
 | `inttegro-sell-by-link` | Products, prices, hosted buy links, and link delivery |
 
 ## Install one skill from a clone

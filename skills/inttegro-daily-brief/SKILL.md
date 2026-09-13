@@ -18,6 +18,7 @@ Build the brief from live Inttegro MCP results. Never substitute invented exampl
    - `get_message_analytics` for initialized, delivered, failed, and delivered-to-initialized activity trends without message content; do not call the period ratio a cohort delivery rate.
    - `get_balances` for current balance snapshots.
    - `list_orders` for recent operational exceptions that aggregate analytics cannot explain.
+   - When the request requires every matching order rather than a recent sample, continue `list_orders` sequentially while `may_have_more` is true through page 10, deduplicate IDs, and disclose the 500-order ceiling if more may remain.
 3. State the period, currency, data status, and whether a comparison lacks a prior baseline.
 4. Present every amount using the returned exact major-unit decimal string and currency. Minor-unit integers are supplemental machine data and should not be the merchant-facing value.
 5. Lead with 3–5 exact findings, then identify at most three decisions or follow-ups justified by the data.

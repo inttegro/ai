@@ -2,15 +2,15 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "inttegro",
   "displayName": "Inttegro",
-  "version": "0.1.6",
-  "description": "Operate an Inttegro merchant account from Claude with live Inttegro tools for commerce, contacts, files, reusable messages, confirmed actions, analytics, integration guidance, and reusable workflows.",
+  "version": "0.2.0",
+  "description": "Operate an Inttegro merchant account from Claude with live commerce tools, thirteen reusable workflows, read-only investigators, and action-capable sales, order, and customer-resolution operators.",
   "author": {
     "name": "Inttegro",
     "email": "support@inttegro.com",
     "url": "https://inttegro.com/"
   },
   "homepage": "https://studio.inttegro.com/inttegro-mcp",
-  "repository": "https://github.com/inttegro/ai/tree/main/plugins/inttegro",
+  "repository": "https://github.com/inttegro/ai/tree/master/plugins/inttegro",
   "license": "MIT",
   "keywords": [
     "commerce",

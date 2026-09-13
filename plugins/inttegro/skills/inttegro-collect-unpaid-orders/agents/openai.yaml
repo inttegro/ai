@@ -1,0 +1,14 @@
+interface:
+  display_name: "Inttegro collections"
+  short_description: "Recover payment on eligible unpaid orders"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-collect-unpaid-orders to find eligible unpaid orders and help me collect payment."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "inttegro"
+      description: "Authenticated Inttegro order, payment, and messaging tools"
+      transport: "streamable_http"
+      url: "https://mcp.inttegro.com/"
+policy:
+  allow_implicit_invocation: true

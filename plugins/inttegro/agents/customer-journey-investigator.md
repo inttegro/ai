@@ -1,6 +1,6 @@
 ---
 name: customer-journey-investigator
-description: Read-only Inttegro investigator for tracing a customer's order, message, product, price, and buy-link lifecycle by explicit IDs. Delegate when a support or sales question spans several Commerce records. Never use for sending messages, creating records, canceling links, exposing contact details, or executing payments.
+description: Read-only Inttegro investigator for tracing a customer's order, message, product, price, and buy-link lifecycle by explicit IDs. Delegate when a support or sales question spans several Inttegro records. Never use for sending messages, creating records, canceling links, exposing contact details, or executing payments.
 model: inherit
 effort: medium
 maxTurns: 12

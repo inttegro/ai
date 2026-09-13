@@ -10,9 +10,18 @@ Treat product, price, link, and message creation as separate authoritative steps
 ## Resolve the offer
 
 1. Use `list_products` or `get_product` to find an existing product. Use `list_prices` or `get_price` to verify the selected price.
-2. When the merchant wants to inspect one resolved product visually and the host supports MCP Apps UI, pass the unchanged `get_product` result to `render_product_card`. Do not substitute the catalog carousel for a single-product view.
-3. If no suitable product exists, gather the exact name, type, reference, and description, then call `create_product` with a stable operation key after confirmation.
-4. If no suitable price exists, gather the exact ISO currency and a major-unit decimal string such as `350.00`, then call `create_product_price` with a stable operation key after confirmation. Never infer an amount or ask the user to convert it to minor units.
+2. For an exhaustive catalog search, continue while `may_have_more` is true through page 10, deduplicate IDs, and disclose any remaining 500-record service ceiling.
+3. When the merchant wants to compare the returned page visually and the host supports MCP Apps UI, pass the unchanged `list_products` result to `render_catalog_carousel`. For one resolved product, pass the unchanged `get_product` result to `render_product_card`.
+4. If no suitable product exists, gather the exact name, type, reference, and description, then call `create_product` with a stable operation key after confirmation.
+5. If no suitable price exists, gather the exact ISO currency and a major-unit decimal string such as `350.00`, then call `create_product_price` with a stable operation key after confirmation. Never infer an amount or ask the user to convert it to minor units.
+
+## Maintain the catalog lifecycle
+
+- Use `update_product` only for the supported descriptive fields and show the fields that will change.
+- Use `publish_product` to make an approved product available for new catalog and checkout flows. Use `unpublish_product` to hide it without retiring the record; reserve `archive_product` for deliberate retirement.
+- Use `update_price` only for label or description. Amount, currency, and product association are immutable; create a new price for new commercial terms.
+- Use `activate_price`, `deactivate_price`, and `archive_price` only for the requested lifecycle outcome. Archival is permanent for new use.
+- Refresh the product or price after each transition and do not roll back a successful earlier step without separate authorization.
 
 ## Create and present the link
 

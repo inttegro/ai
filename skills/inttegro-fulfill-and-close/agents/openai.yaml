@@ -1,0 +1,14 @@
+interface:
+  display_name: "Inttegro fulfillment closeout"
+  short_description: "Complete fulfilled orders and send receipts"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-fulfill-and-close to find paid incomplete orders and close the ones I approve."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "inttegro"
+      description: "Authenticated Inttegro order lifecycle and receipt tools"
+      transport: "streamable_http"
+      url: "https://mcp.inttegro.com/"
+policy:
+  allow_implicit_invocation: true

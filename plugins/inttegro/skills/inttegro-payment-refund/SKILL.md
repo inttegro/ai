@@ -29,3 +29,7 @@ Call `get_refund_options` first, then keep the conversation progressive:
 Refund creation is asynchronous. Say that `pending` or `processing` has started, not completed. Use `get_refund` to reconcile and call it completed only when status is `succeeded`. Use `cancel_refund` only for a still-pending refund and preserve its separate confirmation.
 
 If the refreshed refund snapshot or owning API rejects the request, explain the current constraint and return to the affected choice instead of silently changing an amount, line, or reason.
+
+## Monitor refunds
+
+Use `list_refunds` for a bounded operational page and `get_refund` for the authoritative state of a selected refund. When the user asks for all returned exceptions, continue sequentially while `may_have_more` is true through page 10, deduplicate by refund ID, and disclose the 500-refund ceiling if more may remain. Keep pending, processing, succeeded, failed, and canceled separate; only succeeded means the customer received the refund.

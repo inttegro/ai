@@ -11,7 +11,7 @@
         "source": "git-subdir",
         "url": "https://github.com/inttegro/ai.git",
         "path": "plugins/inttegro",
-        "ref": "main"
+        "ref": "master"
       },
       "policy": {
         "installation": "AVAILABLE",

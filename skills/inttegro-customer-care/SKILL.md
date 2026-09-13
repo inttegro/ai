@@ -11,7 +11,8 @@ Customer IDs—not raw contact values—are the model-visible boundary.
 
 1. Use `list_customers` for a bounded page or `get_customer` for a known ID.
 2. Use `get_customer_analytics` for aggregate purchase activity over `7d`, `30d`, or `90d`; present revenue using the returned exact major-unit decimal strings and currency.
-3. The minimized customer result exposes channel availability but withholds the email address, phone number, street address, and custom data. Do not try to reconstruct or request those values.
+3. Use `list_payment_methods` when the merchant asks how many methods the customer has saved or needs safe masked summaries. Respect `count_is_exact` and `summaries_truncated`; never describe a method as usable unless its returned state supports that.
+4. The minimized customer result exposes channel availability but withholds the email address, phone number, street address, and custom data. Do not try to reconstruct or request those values.
 
 ## Maintain a record
 

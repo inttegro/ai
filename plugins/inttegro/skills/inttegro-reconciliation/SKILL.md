@@ -5,7 +5,7 @@ description: Inspect Inttegro balances, balance transactions, payouts, payout se
 
 # Inttegro reconciliation
 
-Explain the evidence returned by Commerce without overstating completeness.
+Explain the evidence returned by Inttegro without overstating completeness.
 
 ## Workflow
 

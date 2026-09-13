@@ -8,7 +8,7 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 
 | Project | Description | Status |
 | --- | --- | --- |
-| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with Commerce tools, nine merchant workflows, two read-only specialists, and MCP Apps metadata. | Public source; directory reviews pending |
+| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with Inttegro tools, thirteen merchant workflows, two read-only investigators, three action-capable operators, and MCP Apps metadata. | Public source; directory reviews pending |
 | [Standalone skills](skills) | Individually reusable merchant workflows for skills-compatible agents. | Available from source |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
@@ -21,7 +21,7 @@ Inttegro hosts a remote Model Context Protocol server at:
 https://mcp.inttegro.com/
 ```
 
-Compatible clients authenticate with OAuth. The service checks the selected organization, membership, and granular Commerce scopes on every request. API keys remain a separate workload credential for headless integrations and should never be pasted into an interactive AI conversation.
+Compatible clients authenticate with OAuth. The service checks the selected organization, membership, and granular Inttegro scopes on every request. API keys remain a separate workload credential for headless integrations and should never be pasted into an interactive AI conversation.
 
 ## Install the Claude plugin
 
@@ -42,7 +42,7 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 - `registry/` — versioned discovery metadata for the official MCP Registry.
 - `scripts/` — dependency-free consistency and package validation.
 
-The hosted Commerce platform, customer data, credentials, and internal operational tooling do not belong in this repository.
+The hosted Inttegro platform, customer data, credentials, and internal operational tooling do not belong in this repository.
 
 ## Development
 
