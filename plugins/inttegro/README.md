@@ -1,6 +1,9 @@
 # Inttegro agent plugin
 
-This plugin connects Claude, ChatGPT, and other compatible agent hosts to the shared Inttegro MCP service. It combines live, account-scoped commerce tools with merchant workflow skills, read-only Claude specialists, and portable MCP Apps metadata.
+This plugin connects Claude, ChatGPT, Codex, GitHub Copilot, VS Code, and other
+compatible agent hosts to the shared Inttegro MCP service. It combines live,
+account-scoped commerce tools with merchant workflow skills, read-only Claude
+specialists, and portable MCP Apps metadata.
 
 ## What merchants can do
 
@@ -17,10 +20,12 @@ The plugin never asks for raw card details, OTP codes, or an Inttegro API key in
 
 ## Included components
 
-- Nine workflow skills for daily briefs, order operations, payments and refunds, reconciliation, customer care, buy links, files, message templates, and integration planning.
+- A root `plugin.json` and `mcp.json` using the portable Agent Plugins 1.0 format.
+- Nine release copies of the canonical standalone skills under the repository-root `skills/` directory.
 - Two read-only Claude specialists for commerce analysis and customer-journey investigation.
-- One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`.
-- Metadata and artwork for Claude and OpenAI-compatible plugin hosts.
+- One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`; the
+  Claude-compatible `.mcp.json` also carries its registered public OAuth client.
+- Compatibility metadata and artwork for Claude and OpenAI plugin hosts.
 
 ## Authentication
 
@@ -39,13 +44,18 @@ Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to se
 
 ## Other MCP hosts
 
-Compatible clients can connect directly to:
+Agent Plugins 1.0 hosts can consume this package through repository marketplace
+metadata or a packaged release. Compatible MCP clients can also connect directly
+to:
 
 ```text
 https://mcp.inttegro.com/
 ```
 
 Executable commerce logic and authorization policy remain on the shared Inttegro service rather than being duplicated for a particular host.
+
+The portable manifest relies on OAuth protected-resource discovery and contains
+no bearer token, API key, or reusable merchant credential.
 
 ## Support
 

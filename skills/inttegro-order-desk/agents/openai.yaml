@@ -1,0 +1,14 @@
+interface:
+  display_name: "Inttegro Order Desk"
+  short_description: "Investigate orders and send order documents"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-order-desk to check an order and explain its latest status."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "inttegro"
+      description: "Authenticated Inttegro order tools"
+      transport: "streamable_http"
+      url: "https://mcp.inttegro.com/"
+policy:
+  allow_implicit_invocation: true

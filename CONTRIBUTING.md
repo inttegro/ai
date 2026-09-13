@@ -22,9 +22,16 @@ Open an issue before starting a large package or architectural change so the pub
 For the Inttegro agent plugin, run:
 
 ```bash
+node scripts/validate-public-package.mjs
+node scripts/sync-skills.mjs --check
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
 ```
+
+The top-level `skills/` directories are the canonical standalone skills. The
+plugin bundles byte-for-byte copies so installed plugins remain self-contained.
+After changing a standalone skill, run `node scripts/sync-skills.mjs` and commit
+both the standalone and bundled copies.
 
 Never commit credentials, access tokens, production exports, customer information, or private source copied from Inttegro services.
 
