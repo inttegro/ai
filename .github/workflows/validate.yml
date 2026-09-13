@@ -20,6 +20,14 @@ jobs:
           package-manager-cache: false
       - name: Validate JSON
         run: find . -name '*.json' -not -path './.git/*' -print0 | xargs -0 -n1 jq empty
+      - name: Validate portable package
+        run: |
+          node scripts/validate-public-package.mjs
+          node scripts/sync-skills.mjs --check
+      - name: Test MCP doctor
+        run: |
+          npm --prefix packages/mcp-doctor run check
+          npm --prefix packages/mcp-doctor test
       - name: Validate Claude marketplace
         run: npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
       - name: Validate Inttegro plugin

@@ -1,0 +1,28 @@
+{
+  "name": "@inttegro/mcp-doctor",
+  "version": "0.1.0",
+  "description": "Read-only diagnostics for the Inttegro MCP endpoint, OAuth metadata, and authenticated tool discovery.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inttegro/ai.git",
+    "directory": "packages/mcp-doctor"
+  },
+  "homepage": "https://github.com/inttegro/ai/tree/main/packages/mcp-doctor",
+  "bin": {
+    "inttegro-mcp-doctor": "./bin/inttegro-mcp-doctor.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node --check bin/inttegro-mcp-doctor.mjs && node --check src/cli.mjs && node --check src/doctor.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

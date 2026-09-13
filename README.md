@@ -8,7 +8,10 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 
 | Project | Description | Status |
 | --- | --- | --- |
-| [Inttegro agent plugin](plugins/inttegro) | Commerce tools, nine merchant workflows, two read-only specialists, and portable MCP Apps metadata for Claude and OpenAI-compatible hosts. | Preparing for marketplace review |
+| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with Commerce tools, nine merchant workflows, two read-only specialists, and MCP Apps metadata. | Public source; directory reviews pending |
+| [Standalone skills](skills) | Individually reusable merchant workflows for skills-compatible agents. | Available from source |
+| [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
+| [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
 
 ## Inttegro MCP
 
@@ -36,6 +39,8 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 - `packages/` — libraries and protocol adapters suitable for independent versioning.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
 - `.claude-plugin/` and `.codex-plugin/` — marketplace metadata for supported hosts.
+- `registry/` — versioned discovery metadata for the official MCP Registry.
+- `scripts/` — dependency-free consistency and package validation.
 
 The hosted Commerce platform, customer data, credentials, and internal operational tooling do not belong in this repository.
 
