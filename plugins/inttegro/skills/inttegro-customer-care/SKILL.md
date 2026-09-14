@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-customer-care
 description: Find, create, update, and message Inttegro customers while protecting contact details. Use when a merchant asks about a customer's commerce activity, wants to maintain a customer record, review message delivery, or send a consented SMS. Do not use for exporting contact lists, revealing email addresses or phone numbers, or unsolicited bulk marketing.
 ---

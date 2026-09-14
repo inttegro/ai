@@ -5,14 +5,14 @@
     "email": "support@inttegro.com",
     "url": "https://inttegro.com/"
   },
-  "description": "Open-source Inttegro plugins for commerce operations and business intelligence.",
+  "description": "Open-source Inttegro plugins for developer integrations, commerce operations, and business intelligence.",
   "plugins": [
     {
       "name": "inttegro",
       "source": "./plugins/inttegro",
       "displayName": "Inttegro",
-      "description": "Operate an Inttegro merchant account from Claude with live tools, confirmed actions, analytics, and reusable workflows.",
-      "version": "0.2.0",
+      "description": "Build Inttegro integrations or operate an authenticated merchant account from Claude with developer skills and live tools.",
+      "version": "0.3.0",
       "author": {
         "name": "Inttegro"
       },

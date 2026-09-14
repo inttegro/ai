@@ -1,13 +1,13 @@
 {
   "name": "inttegro",
-  "version": "0.2.0",
-  "description": "Operate an Inttegro merchant account from OpenAI with thirteen outcome and resource workflows, confirmed commerce actions, analytics, and portable MCP Apps views.",
+  "version": "0.3.0",
+  "description": "Build Inttegro integrations and operate an authenticated merchant account with developer skills, internal workflows, confirmed actions, analytics, and portable MCP Apps views.",
   "author": {
     "name": "Inttegro",
     "email": "support@inttegro.com",
     "url": "https://inttegro.com/"
   },
-  "homepage": "https://studio.inttegro.com/inttegro-mcp",
+  "homepage": "https://studio.inttegro.dev/inttegro-mcp",
   "repository": "https://github.com/inttegro/ai/tree/master/plugins/inttegro",
   "license": "MIT",
   "keywords": [
@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Inttegro",
     "shortDescription": "Run merchant operations with Inttegro",
-    "longDescription": "Run outcome-oriented collections, fulfillment closeout, offer launch, and customer-resolution workflows; understand orders, products, customers, files, balances, payouts, messages, and sales performance; take confirmed payment through masked choices and secure checkout; guide line-item refunds; manage commerce and file lifecycles; or turn SDK and checkout choices into an integration build and test plan.",
+    "longDescription": "Build, test, debug, and upgrade Inttegro API, SDK, Checkout, and MCP integrations; understand orders, products, customers, files, balances, payouts, messages, and sales performance; take confirmed actions through authenticated merchant workflows; and present structured results through portable MCP Apps.",
     "developerName": "Inttegro",
     "category": "Business",
     "capabilities": ["Analytics", "Interactive", "Write"],

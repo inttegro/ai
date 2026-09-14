@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro"
+  short_description: "Build a production Inttegro integration"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro to choose and implement the right Inttegro integration path for this project."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro best practices"
+  short_description: "Harden an Inttegro integration for production"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-best-practices to review this integration for production safety and correctness."
+policy:
+  allow_implicit_invocation: true

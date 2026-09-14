@@ -28,10 +28,12 @@ npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
 ```
 
-The top-level `skills/` directories are the canonical standalone skills. The
-plugin bundles byte-for-byte copies so installed plugins remain self-contained.
-After changing a standalone skill, run `node scripts/sync-skills.mjs` and commit
-both the standalone and bundled copies.
+The top-level `skills/` directories are the canonical public developer skills.
+The plugin bundles byte-for-byte copies and can also contain authenticated
+merchant workflows marked `metadata.internal: true`. After changing a public
+skill, run `node scripts/sync-skills.mjs` and commit both copies. Do not move a
+merchant operation into the public catalog merely to make it independently
+installable.
 
 Never commit credentials, access tokens, production exports, customer information, or private source copied from Inttegro services.
 

@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-files
 description: Upload, inspect, share, revoke, and delete Inttegro files safely. Use when a merchant asks to attach or store a file, inspect file processing or scan status, create or revoke a customer-facing file link, or remove a file. Do not use to expose authenticated file bytes, disclose capability URLs from read results, or upload content the user did not select.
 ---

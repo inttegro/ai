@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-collect-unpaid-orders
 description: Find Inttegro orders that still need payment, prepare the appropriate recovery action, carry out only the actions the merchant approves, and reconcile the result. Use when a merchant asks about unpaid, outstanding, abandoned, or payment-pending orders. Do not use for unsolicited bulk messaging or automatic charging.
 ---

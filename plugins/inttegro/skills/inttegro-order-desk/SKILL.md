@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-order-desk
 description: Investigate, create, and communicate about Inttegro orders. Use when a merchant asks for an order's latest status, recent orders, a new order, an invoice, a receipt, or a compact order view. Route payment and refund work to inttegro-payment-refund; never reveal customer contact details.
 ---

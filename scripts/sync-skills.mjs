@@ -24,48 +24,91 @@ async function listFiles(root, directory = root) {
   return files.sort();
 }
 
+async function listSkillDirectories(root) {
+  const entries = await readdir(root, { withFileTypes: true });
+  const skills = [];
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const manifest = await stat(join(root, entry.name, "SKILL.md")).catch(() => null);
+    if (manifest?.isFile()) skills.push(entry.name);
+  }
+
+  return skills.sort();
+}
+
 async function assertDirectory(path, label) {
   const value = await stat(path).catch(() => null);
   if (!value?.isDirectory()) throw new Error(`${label} is missing: ${path}`);
 }
 
 async function compare() {
-  await assertDirectory(sourceRoot, "Standalone skills directory");
+  await assertDirectory(sourceRoot, "Public skills directory");
   await assertDirectory(pluginRoot, "Plugin skills directory");
 
-  const sourceFiles = await listFiles(sourceRoot);
-  const pluginFiles = await listFiles(pluginRoot);
+  const [publicSkills, pluginSkills] = await Promise.all([
+    listSkillDirectories(sourceRoot),
+    listSkillDirectories(pluginRoot),
+  ]);
   const differences = [];
 
-  if (JSON.stringify(sourceFiles) !== JSON.stringify(pluginFiles)) {
-    differences.push("the skill file lists differ");
+  for (const skill of publicSkills) {
+    if (!pluginSkills.includes(skill)) {
+      differences.push(`${skill} is missing from the plugin`);
+      continue;
+    }
+
+    const [sourceFiles, pluginFiles] = await Promise.all([
+      listFiles(join(sourceRoot, skill)),
+      listFiles(join(pluginRoot, skill)),
+    ]);
+    if (JSON.stringify(sourceFiles) !== JSON.stringify(pluginFiles)) {
+      differences.push(`${skill} has a different file list`);
+      continue;
+    }
+
+    for (const path of sourceFiles) {
+      const [source, bundled] = await Promise.all([
+        readFile(join(sourceRoot, skill, path)),
+        readFile(join(pluginRoot, skill, path)),
+      ]);
+      if (!source.equals(bundled)) differences.push(`${skill}/${path}`);
+    }
   }
 
-  for (const path of sourceFiles) {
-    const [source, bundled] = await Promise.all([
-      readFile(join(sourceRoot, path)),
-      readFile(join(pluginRoot, path)).catch(() => null),
-    ]);
-    if (!bundled || !source.equals(bundled)) differences.push(path);
+  for (const skill of pluginSkills.filter((name) => !publicSkills.includes(name))) {
+    const source = await readFile(join(pluginRoot, skill, "SKILL.md"), "utf8");
+    if (!source.startsWith("---\n") || !source.includes("\nmetadata:\n  internal: true\n")) {
+      differences.push(`${skill} is plugin-only but not marked metadata.internal: true`);
+    }
   }
 
   if (differences.length) {
     throw new Error(
-      `Standalone and plugin skills are out of sync:\n- ${differences.join("\n- ")}\nRun node scripts/sync-skills.mjs.`,
+      `Public and plugin skills are out of sync:\n- ${differences.join("\n- ")}\nRun node scripts/sync-skills.mjs.`,
     );
   }
+
+  return { publicSkills, pluginSkills };
 }
 
 if (checkOnly) {
-  await compare();
-  console.log("Standalone and plugin skills are in sync.");
+  const { publicSkills, pluginSkills } = await compare();
+  console.log(
+    `${publicSkills.length} public skills are synchronized; ${pluginSkills.length - publicSkills.length} plugin-only skills remain internal.`,
+  );
 } else {
-  await assertDirectory(sourceRoot, "Standalone skills directory");
-  await rm(pluginRoot, { recursive: true, force: true });
-  await cp(sourceRoot, pluginRoot, {
-    recursive: true,
-    filter: (path) => !ignoredNames.has(relative(sourceRoot, path)),
-  });
-  await compare();
-  console.log("Synchronized standalone skills into the Inttegro plugin.");
+  await assertDirectory(sourceRoot, "Public skills directory");
+  await assertDirectory(pluginRoot, "Plugin skills directory");
+
+  for (const skill of await listSkillDirectories(sourceRoot)) {
+    const target = join(pluginRoot, skill);
+    await rm(target, { recursive: true, force: true });
+    await cp(join(sourceRoot, skill), target, { recursive: true });
+  }
+
+  const { publicSkills, pluginSkills } = await compare();
+  console.log(
+    `Synchronized ${publicSkills.length} public skills; preserved ${pluginSkills.length - publicSkills.length} internal plugin skills.`,
+  );
 }

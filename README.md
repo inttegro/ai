@@ -10,8 +10,8 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 
 | Project | Description | Status |
 | --- | --- | --- |
-| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with Inttegro tools, thirteen merchant workflows, two read-only investigators, three action-capable operators, and MCP Apps metadata. | Public source; directory reviews pending |
-| [Standalone skills](skills) | Individually reusable merchant workflows for skills-compatible agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
+| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with live Inttegro tools, eight developer skills, twelve internal merchant workflows, five specialist agents, and MCP Apps metadata. | Public source; directory reviews pending |
+| [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
 
@@ -27,16 +27,16 @@ Compatible clients authenticate with OAuth. The service checks the selected orga
 
 ## Install Inttegro skills
 
-Install the full Inttegro skill collection with the open-source `skills` CLI:
+Install the full Inttegro developer skill collection with the open-source `skills` CLI:
 
 ```bash
 npx skills add inttegro/ai
 ```
 
-To install one workflow, select it explicitly:
+To install one skill, select it explicitly:
 
 ```bash
-npx skills add inttegro/ai --skill inttegro-order-desk
+npx skills add inttegro/ai --skill inttegro-checkout
 ```
 
 Browse the complete collection at [skills.sh/inttegro/ai](https://skills.sh/inttegro/ai).
@@ -53,7 +53,7 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 ## Repository structure
 
 - `plugins/` — installable agent plugins and their host manifests.
-- `skills/` — standalone, reusable agent skills that do not need a full plugin.
+- `skills/` — public developer skills for building and maintaining Inttegro integrations.
 - `packages/` — libraries and protocol adapters suitable for independent versioning.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
 - `.claude-plugin/` and `.codex-plugin/` — marketplace metadata for supported hosts.

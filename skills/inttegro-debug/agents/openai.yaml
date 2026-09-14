@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro debug"
+  short_description: "Diagnose and repair Inttegro integrations"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-debug to trace this failure to its cause and propose the smallest verified repair."
+policy:
+  allow_implicit_invocation: true

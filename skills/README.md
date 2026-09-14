@@ -1,25 +1,21 @@
-# Inttegro agent skills
+# Inttegro developer skills
 
-These are the canonical, standalone merchant workflows bundled by the Inttegro
-agent plugin. Each directory follows the open Agent Skills `SKILL.md` format and
-can be installed independently in a skills-compatible host that already has an
-authenticated Inttegro MCP connection.
+These public skills help coding agents build, test, debug, and upgrade Inttegro
+integrations. They work from public contracts and do not require access to a
+merchant account. Authenticated operational workflows are bundled separately
+inside the Inttegro plugin and marked internal so skills.sh does not present
+them as developer integrations.
 
 | Skill | Use it for |
 | --- | --- |
-| `inttegro-collect-unpaid-orders` | Unpaid-order queues, approved collection actions, and payment reconciliation |
-| `inttegro-customer-care` | Customer activity, record maintenance, and consented messaging |
-| `inttegro-daily-brief` | Numbers-first operating and sales briefs |
-| `inttegro-files` | Private files and intentional sharing |
-| `inttegro-fulfill-and-close` | Paid-order closeout, completion, and receipt delivery |
-| `inttegro-integration-builder` | API, SDK, Checkout, and integration readiness decisions |
-| `inttegro-launch-offer` | Product, price, publication, and buy-link launches |
-| `inttegro-message-templates` | Reusable SMS and email template lifecycles |
-| `inttegro-order-desk` | Order investigation, creation, invoices, and receipts |
-| `inttegro-payment-refund` | Secure payment selection and line-item refunds |
-| `inttegro-reconciliation` | Balances, payouts, settings, and operational reconciliation |
-| `inttegro-resolve-customer-case` | Evidence-led customer support and approved resolution |
-| `inttegro-sell-by-link` | Products, prices, hosted buy links, and link delivery |
+| `inttegro` | Choose and implement an API, SDK, Checkout, or MCP integration path |
+| `inttegro-best-practices` | Authentication, money, idempotency, retries, pagination, privacy, and observability |
+| `inttegro-checkout` | Hosted Checkout, redirects, authoritative payment state, and fulfillment boundaries |
+| `inttegro-webhooks` | Current lookup and reconciliation patterns when a design assumes webhooks |
+| `inttegro-testing` | Contract, failure, idempotency, Checkout, and end-to-end test coverage |
+| `inttegro-debug` | Evidence-led diagnosis of API, SDK, Checkout, and MCP failures |
+| `upgrade-inttegro` | Safe SDK, generated-client, and API contract migrations |
+| `inttegro-mcp` | Remote MCP setup, authentication, capability handling, and MCP-powered apps |
 
 ## Install with the skills CLI
 
@@ -32,7 +28,7 @@ npx skills add inttegro/ai
 Install one workflow:
 
 ```bash
-npx skills add inttegro/ai --skill inttegro-order-desk
+npx skills add inttegro/ai --skill inttegro-checkout
 ```
 
 The public catalog is available at
@@ -44,10 +40,11 @@ Copy the complete skill directory into a supported project or user skills
 location. For example:
 
 ```bash
-cp -R skills/inttegro-order-desk /path/to/project/.agents/skills/
+cp -R skills/inttegro-checkout /path/to/project/.agents/skills/
 ```
 
 Use `.claude/skills/` or `.github/skills/` instead when that is the host's
 documented project location. Review skill instructions before installing them.
-No skill contains credentials or bypasses Inttegro's server-side authorization
-and confirmation controls.
+No skill contains credentials or depends on private merchant data. When an
+integration uses MCP, Inttegro's server-side authorization and confirmation
+controls remain authoritative.

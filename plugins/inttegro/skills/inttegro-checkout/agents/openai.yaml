@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro Checkout"
+  short_description: "Build a safe hosted checkout flow"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-checkout to implement and test Inttegro Checkout in this application."
+policy:
+  allow_implicit_invocation: true

@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-fulfill-and-close
 description: Find paid Inttegro orders that are not complete, let the merchant select orders whose fulfillment is finished, mark them complete, and optionally send receipts. Use for fulfillment closeout or paid-but-incomplete order queues. Do not infer physical delivery or complete orders without the merchant's confirmation.
 ---

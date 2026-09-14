@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro testing"
+  short_description: "Test Inttegro flows and failure recovery"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-testing to create and execute a risk-based test plan for this Inttegro integration."
+policy:
+  allow_implicit_invocation: true

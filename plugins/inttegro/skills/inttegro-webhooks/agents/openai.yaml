@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro webhooks"
+  short_description: "Design state sync without fake webhooks"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-webhooks to replace this webhook assumption with a supported Inttegro state-sync design."
+policy:
+  allow_implicit_invocation: true

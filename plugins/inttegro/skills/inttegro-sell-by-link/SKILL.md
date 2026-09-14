@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-sell-by-link
 description: Turn a product offer into a hosted Inttegro buy link and optionally send it to an existing customer. Use when a merchant wants to create a product or price, find a sellable price, create, inspect, update, cancel, display, or send a buy link. Do not use to collect payment inside the agent host, invent prices, or send a link without explicit merchant confirmation.
 ---

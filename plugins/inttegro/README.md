@@ -21,7 +21,8 @@ The plugin never asks for raw card details, OTP codes, or an Inttegro API key in
 ## Included components
 
 - A root `plugin.json` and `mcp.json` using the portable Agent Plugins 1.0 format.
-- Thirteen release copies of the canonical standalone skills under the repository-root `skills/` directory, including outcome workflows for collections, fulfillment closeout, offer launch, and customer resolution.
+- Eight public developer skills synchronized from the repository-root `skills/` directory.
+- Twelve authenticated merchant workflows marked internal so they ship with the plugin without appearing in skills.sh discovery.
 - Five Claude specialists: two read-only investigators plus action-capable sales, order-operations, and customer-resolution operators.
 - One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`; the
   Claude-compatible `.mcp.json` also carries its registered public OAuth client.
@@ -40,7 +41,7 @@ npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --stri
 npx -y @anthropic-ai/claude-code@2.1.269 --plugin-dir ./plugins/inttegro
 ```
 
-Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to see the thirteen `/inttegro:...` skills. Read-only specialists are available as `@inttegro:commerce-analyst` and `@inttegro:customer-journey-investigator`; outcome operators are `@inttegro:sales-closer`, `@inttegro:order-operations-manager`, and `@inttegro:customer-resolution-specialist`.
+Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to see the developer and authenticated merchant skills. Read-only specialists are available as `@inttegro:commerce-analyst` and `@inttegro:customer-journey-investigator`; outcome operators are `@inttegro:sales-closer`, `@inttegro:order-operations-manager`, and `@inttegro:customer-resolution-specialist`.
 
 ## Other MCP hosts
 
@@ -59,7 +60,7 @@ no bearer token, API key, or reusable merchant credential.
 
 ## Support
 
-- [Documentation](https://studio.inttegro.com/inttegro-mcp)
+- [Documentation](https://studio.inttegro.dev/inttegro-mcp)
 - [Privacy policy](https://inttegro.com/privacy)
 - [Terms of service](https://inttegro.com/terms)
 - [Product support](mailto:support@inttegro.com)

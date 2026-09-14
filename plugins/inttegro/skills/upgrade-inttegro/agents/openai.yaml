@@ -1,0 +1,7 @@
+interface:
+  display_name: "Upgrade Inttegro"
+  short_description: "Migrate Inttegro SDK and API usage safely"
+  brand_color: "#16A249"
+  default_prompt: "Use $upgrade-inttegro to plan, apply, and verify this Inttegro integration upgrade."
+policy:
+  allow_implicit_invocation: true

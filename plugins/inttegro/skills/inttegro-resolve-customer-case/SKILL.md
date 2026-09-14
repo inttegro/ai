@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-resolve-customer-case
 description: Investigate one Inttegro customer issue across customers, orders, payment methods, messages, and refunds, then carry out the exact resolution the merchant approves. Use for support cases that need both evidence and action. Do not expose hidden contact or payment details, infer consent, or perform bulk outreach.
 ---

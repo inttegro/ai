@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-reconciliation
 description: Inspect Inttegro balances, balance transactions, payouts, payout settings, country capabilities, and payment-method policy for operational reconciliation. Use when a merchant asks where money is, why balances and payouts differ, whether a payout failed, or what settlement configuration applies. Do not use for accounting certification, moving funds, changing payout settings, or exposing payment credentials.
 ---

@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "inttegro",
-  "version": "0.2.0",
-  "description": "Operate an Inttegro merchant account with live commerce tools, confirmed actions, analytics, and reusable workflows.",
+  "version": "0.3.0",
+  "description": "Build Inttegro integrations or operate an authenticated merchant account with developer skills, live tools, confirmed actions, and analytics.",
   "author": {
     "name": "Inttegro",
     "email": "support@inttegro.com",
     "url": "https://inttegro.com/"
   },
-  "homepage": "https://studio.inttegro.com/inttegro-mcp",
+  "homepage": "https://studio.inttegro.dev/inttegro-mcp",
   "repository": "https://github.com/inttegro/ai/tree/master/plugins/inttegro",
   "license": "MIT",
   "keywords": [

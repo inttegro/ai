@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-payment-refund
 description: Take payment for an Inttegro order or guide a line-item refund. Use when a merchant wants to select a saved or new payment method, start or retry payment, inspect refund availability, create a partial or full refund, check refund status, or cancel a pending refund.
 ---

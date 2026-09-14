@@ -3,40 +3,29 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Sell and collect",
-      "description": "Launch offers, create buy links, and recover eligible unpaid orders.",
-      "skills": [
-        "inttegro-launch-offer",
-        "inttegro-sell-by-link",
-        "inttegro-collect-unpaid-orders"
-      ]
-    },
-    {
-      "title": "Orders and support",
-      "description": "Investigate orders and customer cases, take approved action, and close fulfillment.",
-      "skills": [
-        "inttegro-order-desk",
-        "inttegro-payment-refund",
-        "inttegro-fulfill-and-close",
-        "inttegro-customer-care",
-        "inttegro-resolve-customer-case"
-      ]
-    },
-    {
-      "title": "Operations",
-      "description": "Run daily briefs, reconcile money movement, manage templates, and handle files.",
-      "skills": [
-        "inttegro-daily-brief",
-        "inttegro-reconciliation",
-        "inttegro-message-templates",
-        "inttegro-files"
-      ]
-    },
-    {
       "title": "Build",
-      "description": "Design and validate Inttegro API, SDK, and Checkout integrations.",
+      "description": "Choose an integration path and implement Inttegro API, SDK, and hosted checkout flows.",
       "skills": [
-        "inttegro-integration-builder"
+        "inttegro",
+        "inttegro-best-practices",
+        "inttegro-checkout"
+      ]
+    },
+    {
+      "title": "Test and operate",
+      "description": "Test integrations, diagnose failures, and design supported state synchronization.",
+      "skills": [
+        "inttegro-testing",
+        "inttegro-debug",
+        "inttegro-webhooks"
+      ]
+    },
+    {
+      "title": "Extend",
+      "description": "Upgrade existing integrations and build MCP-powered developer tools.",
+      "skills": [
+        "upgrade-inttegro",
+        "inttegro-mcp"
       ]
     }
   ]

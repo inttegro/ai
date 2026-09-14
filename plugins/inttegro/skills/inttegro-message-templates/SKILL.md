@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-message-templates
 description: Create, inspect, preview, publish, archive, and send reusable Inttegro SMS or email message templates. Use when a merchant asks to manage Chime templates, reuse notification copy, validate variables, review a rendered customer message, or send a published template to a saved customer. Do not use for arbitrary recipients, bulk outreach, scheduled messaging, or sending unreviewed draft content.
 ---

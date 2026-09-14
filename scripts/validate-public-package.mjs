@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -51,16 +51,92 @@ assert(
   "registry metadata must advertise the canonical Streamable HTTP endpoint",
 );
 
-const skills = (await readdir(join(root, "skills"), { withFileTypes: true }))
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => entry.name)
-  .sort();
-assert(skills.length === 13, `expected 13 standalone skills, found ${skills.length}`);
+const skills = [];
+for (const entry of await readdir(join(root, "skills"), { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  const manifest = await stat(join(root, "skills", entry.name, "SKILL.md")).catch(() => null);
+  if (manifest?.isFile()) skills.push(entry.name);
+}
+skills.sort();
+const requiredSkills = [
+  "inttegro",
+  "inttegro-best-practices",
+  "inttegro-checkout",
+  "inttegro-debug",
+  "inttegro-mcp",
+  "inttegro-testing",
+  "inttegro-webhooks",
+  "upgrade-inttegro",
+];
+assert(
+  JSON.stringify(skills) === JSON.stringify(requiredSkills),
+  `expected public developer skills ${requiredSkills.join(", ")}; found ${skills.join(", ")}`,
+);
 
 for (const skill of skills) {
   const source = await readFile(join(root, "skills", skill, "SKILL.md"), "utf8");
   assert(source.startsWith("---\n"), `${skill}/SKILL.md must start with YAML frontmatter`);
   assert(source.includes(`\nname: ${skill}\n`), `${skill}/SKILL.md name must match its directory`);
+  assert(!source.includes("\n  internal: true\n"), `${skill} must remain publicly discoverable`);
+  assert(!source.includes("TODO"), `${skill} must not contain scaffold TODOs`);
+  assert(
+    source.includes("](references/"),
+    `${skill}/SKILL.md must route detailed guidance through a reference file`,
+  );
+
+  const referenceRoot = join(root, "skills", skill, "references");
+  const references = (await readdir(referenceRoot, { withFileTypes: true }))
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name);
+  assert(references.length > 0, `${skill} must include at least one reference file`);
+  const referenceSources = await Promise.all(
+    references.map((name) => readFile(join(referenceRoot, name), "utf8")),
+  );
+  const guidanceLines = [source, ...referenceSources]
+    .join("\n")
+    .split("\n")
+    .filter((line) => line.trim().length > 0).length;
+  assert(
+    guidanceLines >= 35,
+    `${skill} needs substantive integration guidance; found ${guidanceLines} non-empty lines`,
+  );
+
+  const interfaceSource = await readFile(
+    join(root, "skills", skill, "agents", "openai.yaml"),
+    "utf8",
+  );
+  assert(
+    interfaceSource.includes(`$${skill}`),
+    `${skill}/agents/openai.yaml default prompt must mention $${skill}`,
+  );
+}
+
+const pluginSkills = [];
+for (const entry of await readdir(join(root, "plugins", "inttegro", "skills"), {
+  withFileTypes: true,
+})) {
+  if (!entry.isDirectory()) continue;
+  const manifest = await stat(
+    join(root, "plugins", "inttegro", "skills", entry.name, "SKILL.md"),
+  ).catch(() => null);
+  if (manifest?.isFile()) pluginSkills.push(entry.name);
+}
+pluginSkills.sort();
+const internalPluginSkills = pluginSkills.filter((name) => !skills.includes(name));
+assert(pluginSkills.length === 20, `expected 20 plugin skills, found ${pluginSkills.length}`);
+assert(
+  internalPluginSkills.length === 12,
+  `expected 12 internal merchant workflows, found ${internalPluginSkills.length}`,
+);
+for (const skill of internalPluginSkills) {
+  const source = await readFile(
+    join(root, "plugins", "inttegro", "skills", skill, "SKILL.md"),
+    "utf8",
+  );
+  assert(
+    source.includes("\nmetadata:\n  internal: true\n"),
+    `${skill} must be marked metadata.internal: true`,
+  );
 }
 
 const skillsPage = await readJson("skills.sh.json");
@@ -116,4 +192,6 @@ for (const agent of agents) {
   assert(source.includes(`\nname: ${expectedName}\n`), `${agent} name must match its filename`);
 }
 
-console.log(`Validated portable plugin, registry metadata, ${skills.length} standalone skills, and ${agents.length} agents.`);
+console.log(
+  `Validated portable plugin, registry metadata, ${skills.length} public developer skills, ${internalPluginSkills.length} internal merchant workflows, and ${agents.length} agents.`,
+);

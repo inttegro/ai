@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-daily-brief
 description: Produce a concise, numbers-first operating brief for an Inttegro merchant using live orders, balances, and order, product, customer, payout, or message analytics. Use when the user asks how the business is doing, what changed, what needs attention, top products or customers, payout performance, message delivery, today's status, or a sales overview. Do not use for bookkeeping conclusions, moving funds, or creating or messaging records.
 ---

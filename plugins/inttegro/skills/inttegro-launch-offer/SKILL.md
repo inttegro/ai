@@ -1,4 +1,6 @@
 ---
+metadata:
+  internal: true
 name: inttegro-launch-offer
 description: Turn a merchant's offer into a verified Inttegro product, price, published catalog entry, and hosted buy link, with optional customer delivery. Use when launching or relaunching something for sale. Do not publish, archive, message, or invent commercial terms without explicit merchant direction.
 ---

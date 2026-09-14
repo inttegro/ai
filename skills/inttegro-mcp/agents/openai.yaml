@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro MCP"
+  short_description: "Connect and build with the Inttegro MCP server"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-mcp to configure and verify Inttegro MCP for this agent application."
+policy:
+  allow_implicit_invocation: true
