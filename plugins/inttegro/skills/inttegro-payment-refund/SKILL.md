@@ -34,4 +34,4 @@ If the refreshed refund snapshot or owning API rejects the request, explain the 
 
 ## Monitor refunds
 
-Use `list_refunds` for a bounded operational page and `get_refund` for the authoritative state of a selected refund. When the user asks for all returned exceptions, continue sequentially while `may_have_more` is true through page 10, deduplicate by refund ID, and disclose the 500-refund ceiling if more may remain. Keep pending, processing, succeeded, failed, and canceled separate; only succeeded means the customer received the refund.
+Use `list_refunds` for a bounded operational page and `get_refund` for the authoritative state of a selected refund. When the user asks for all returned exceptions, continue sequentially while `may_have_more` is true through page 10, deduplicate by refund ID, and disclose the 500-refund ceiling if more may remain. Keep pending, processing, succeeded, failed, and canceled separate; `succeeded` confirms the Inttegro refund lifecycle, not when the customer's bank or wallet displays the credit.

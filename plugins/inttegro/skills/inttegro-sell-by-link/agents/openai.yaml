@@ -1,8 +1,8 @@
 interface:
-  display_name: "Inttegro Sell by Link"
-  short_description: "Create products, prices, and hosted buy links"
+  display_name: "Inttegro buy links"
+  short_description: "Manage links for existing sellable offers"
   brand_color: "#16A249"
-  default_prompt: "Use $inttegro-sell-by-link to create a buy link for a product and prepare it to send."
+  default_prompt: "Use $inttegro-sell-by-link to create or manage a buy link for this existing product and price."
 dependencies:
   tools:
     - type: "mcp"

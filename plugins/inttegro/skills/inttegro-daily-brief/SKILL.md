@@ -11,7 +11,7 @@ Build the brief from live Inttegro MCP results. Never substitute invented exampl
 
 ## Workflow
 
-1. Establish the requested currency and reporting period. If absent, use `30d` and the merchant's clearly established operating currency; otherwise ask for the currency rather than guessing.
+1. Establish the requested currency and reporting period. For an unspecified overview, use `30d` and the merchant's clearly established operating currency; otherwise ask for the currency rather than guessing. Analytics accepts `7d`, `30d`, or `90d`—not a `today` period. For a today-specific question, use the dated daily series from `7d` and label its UTC-day and incomplete-day coverage; if no bucket exists for today, report missing coverage rather than zero. Do not present a seven-day total as today's total.
 2. Call only the smallest useful set of tools:
    - `get_order_analytics` for starts, paid orders, cancellations, expirations, gross volume, comparisons, and daily series.
    - `get_product_analytics` for product rankings.
@@ -23,7 +23,7 @@ Build the brief from live Inttegro MCP results. Never substitute invented exampl
    - When the request requires every matching order rather than a recent sample, continue `list_orders` sequentially while `may_have_more` is true through page 10, deduplicate IDs, and disclose the 500-order ceiling if more may remain.
 3. State the period, currency, data status, and whether a comparison lacks a prior baseline.
 4. Present every amount using the returned exact major-unit decimal string and currency. Minor-unit integers are supplemental machine data and should not be the merchant-facing value.
-5. Lead with 3–5 exact findings, then identify at most three decisions or follow-ups justified by the data.
+5. Lead with the exact findings that answer the request, then identify only decisions or follow-ups justified by the data.
 6. When the host advertises MCP Apps UI and a visual summary helps, call `render_analytics_dashboard` once with the exact analytics result and matching `analytics_type`. Otherwise summarize the returned metrics and Flint chart data directly. Do not recalculate or rewrite the input metrics.
 
 If analytics is unavailable, say so and fall back only to the read tools that answer the question. Do not portray a bounded page as a full-period total.
