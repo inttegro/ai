@@ -19,14 +19,6 @@ Run a scheduled job over a bounded time range or explicit unresolved set:
 
 Use balance transactions for money-movement reconciliation rather than reconstructing settlement from orders or payouts alone.
 
-## If webhooks become available
+## Future event delivery
 
-Treat a webhook as a notification, not settlement proof:
-
-1. Verify the signature using the documented raw-body algorithm.
-2. Deduplicate by event ID.
-3. Fetch the referenced Inttegro resource.
-4. Apply the same idempotent convergence function used by reconciliation.
-5. Acknowledge only after durable receipt or processing according to the future delivery contract.
-
-Do not implement these signature details until Inttegro publishes the merchant webhook contract.
+Keep the local convergence function independent of the trigger. If Inttegro later publishes a merchant event-delivery contract, implement its documented authentication, deduplication, and acknowledgement rules before connecting it to the existing read-and-converge path. Do not guess those rules today.

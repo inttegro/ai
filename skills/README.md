@@ -11,7 +11,7 @@ them as developer integrations.
 | `inttegro` | Choose and implement an API, SDK, Checkout, or MCP integration path |
 | `inttegro-best-practices` | Authentication, money, idempotency, retries, pagination, privacy, and observability |
 | `inttegro-checkout` | Hosted Checkout, redirects, authoritative payment state, and fulfillment boundaries |
-| `inttegro-webhooks` | Current lookup and reconciliation patterns when a design assumes webhooks |
+| `inttegro-state-sync` | Lookup, bounded polling, and reconciliation for resource status updates; Inttegro does not yet offer merchant webhooks |
 | `inttegro-testing` | Contract, failure, idempotency, Checkout, and end-to-end test coverage |
 | `inttegro-debug` | Evidence-led diagnosis of API, SDK, Checkout, and MCP failures |
 | `upgrade-inttegro` | Safe SDK, generated-client, and API contract migrations |

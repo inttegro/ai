@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inttegro state sync"
+  short_description: "Keep local state current without webhooks"
+  brand_color: "#16A249"
+  default_prompt: "Use $inttegro-state-sync to design Inttegro status updates and background reconciliation for this application."
+policy:
+  allow_implicit_invocation: true

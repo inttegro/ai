@@ -15,10 +15,10 @@ Do not request or print bearer tokens, authorization headers, full bodies with c
 
 ## Follow the diagnostic order
 
-1. Reproduce with the smallest safe request in the same environment and credential boundary.
+1. Reproduce with the smallest read-only request or a disposable test fixture in the same credential boundary. Do not replay a live write merely to diagnose it.
 2. Confirm the request is sent from trusted server code to `https://api.inttegro.com`, or MCP is connected to `https://mcp.inttegro.com` without an added path.
 3. Classify the failure using [diagnostic map](references/diagnostic-map.md). Prefer the structured error fields over guessed meaning from status text.
-4. For timeouts, conflicts, or uncertain writes, read the current resource or replay with the original idempotency key and unchanged payload. Do not create a replacement action first.
+4. For timeouts, conflicts, or uncertain writes, read current resource state first. Replay with the original idempotency key and unchanged payload only when recovery of that requested write is authorized; do not create a replacement action first.
 5. Compare the exact request field, enum, and lifecycle precondition with the current Studio API reference and the installed SDK version.
 6. Isolate whether the defect is request construction, credential or scope, transport, stale local state, unsupported lifecycle transition, or client presentation.
 

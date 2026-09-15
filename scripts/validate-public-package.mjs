@@ -55,7 +55,8 @@ const skills = [];
 for (const entry of await readdir(join(root, "skills"), { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;
   const manifest = await stat(join(root, "skills", entry.name, "SKILL.md")).catch(() => null);
-  if (manifest?.isFile()) skills.push(entry.name);
+  assert(manifest?.isFile(), `public skills/${entry.name} must contain SKILL.md`);
+  skills.push(entry.name);
 }
 skills.sort();
 const requiredSkills = [
@@ -64,8 +65,8 @@ const requiredSkills = [
   "inttegro-checkout",
   "inttegro-debug",
   "inttegro-mcp",
+  "inttegro-state-sync",
   "inttegro-testing",
-  "inttegro-webhooks",
   "upgrade-inttegro",
 ];
 assert(
@@ -119,14 +120,29 @@ for (const entry of await readdir(join(root, "plugins", "inttegro", "skills"), {
   const manifest = await stat(
     join(root, "plugins", "inttegro", "skills", entry.name, "SKILL.md"),
   ).catch(() => null);
-  if (manifest?.isFile()) pluginSkills.push(entry.name);
+  assert(manifest?.isFile(), `plugin skill ${entry.name} must contain SKILL.md`);
+  pluginSkills.push(entry.name);
 }
 pluginSkills.sort();
 const internalPluginSkills = pluginSkills.filter((name) => !skills.includes(name));
+const requiredMerchantWorkflows = [
+  "inttegro-collect-unpaid-orders",
+  "inttegro-customer-care",
+  "inttegro-daily-brief",
+  "inttegro-files",
+  "inttegro-fulfill-and-close",
+  "inttegro-launch-offer",
+  "inttegro-message-templates",
+  "inttegro-order-desk",
+  "inttegro-payment-refund",
+  "inttegro-reconciliation",
+  "inttegro-resolve-customer-case",
+  "inttegro-sell-by-link",
+];
 assert(pluginSkills.length === 20, `expected 20 plugin skills, found ${pluginSkills.length}`);
 assert(
-  internalPluginSkills.length === 12,
-  `expected 12 internal merchant workflows, found ${internalPluginSkills.length}`,
+  JSON.stringify(internalPluginSkills) === JSON.stringify(requiredMerchantWorkflows),
+  `merchant workflows must remain plugin-only; found ${internalPluginSkills.join(", ")}`,
 );
 for (const skill of internalPluginSkills) {
   const source = await readFile(
