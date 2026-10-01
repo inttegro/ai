@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cp, readdir, readFile, rm, stat } from "node:fs/promises";
+import { cp, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,6 +9,41 @@ const sourceRoot = join(repositoryRoot, "skills");
 const pluginRoot = join(repositoryRoot, "plugins", "inttegro", "skills");
 const checkOnly = process.argv.includes("--check");
 const ignoredNames = new Set(["README.md", ".DS_Store"]);
+const pluginSkillNames = new Map([
+  ["inttegro", "integration"],
+  ["inttegro-best-practices", "best-practices"],
+  ["inttegro-checkout", "checkout"],
+  ["inttegro-debug", "debug"],
+  ["inttegro-mcp", "mcp"],
+  ["inttegro-state-sync", "state-sync"],
+  ["inttegro-testing", "testing"],
+  ["upgrade-inttegro", "upgrade"],
+]);
+
+function pluginSkillName(publicSkillName) {
+  const value = pluginSkillNames.get(publicSkillName);
+  if (!value) throw new Error(`Missing plugin-local name for public skill ${publicSkillName}`);
+  return value;
+}
+
+function transformPublicSkillFile(publicSkillName, path, source) {
+  let value = source.toString("utf8");
+
+  if (path === "SKILL.md") {
+    value = value.replace(
+      `\nname: ${publicSkillName}\n`,
+      `\nname: ${pluginSkillName(publicSkillName)}\n`,
+    );
+  }
+
+  for (const [publicName, pluginName] of [...pluginSkillNames].sort(
+    ([left], [right]) => right.length - left.length,
+  )) {
+    value = value.replaceAll(`$${publicName}`, `$${pluginName}`);
+  }
+
+  return Buffer.from(value, "utf8");
+}
 
 async function listFiles(root, directory = root) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -53,14 +88,15 @@ async function compare() {
   const differences = [];
 
   for (const skill of publicSkills) {
-    if (!pluginSkills.includes(skill)) {
-      differences.push(`${skill} is missing from the plugin`);
+    const bundledSkill = pluginSkillName(skill);
+    if (!pluginSkills.includes(bundledSkill)) {
+      differences.push(`${skill} is missing from the plugin as ${bundledSkill}`);
       continue;
     }
 
     const [sourceFiles, pluginFiles] = await Promise.all([
       listFiles(join(sourceRoot, skill)),
-      listFiles(join(pluginRoot, skill)),
+      listFiles(join(pluginRoot, bundledSkill)),
     ]);
     if (JSON.stringify(sourceFiles) !== JSON.stringify(pluginFiles)) {
       differences.push(`${skill} has a different file list`);
@@ -70,13 +106,16 @@ async function compare() {
     for (const path of sourceFiles) {
       const [source, bundled] = await Promise.all([
         readFile(join(sourceRoot, skill, path)),
-        readFile(join(pluginRoot, skill, path)),
+		readFile(join(pluginRoot, bundledSkill, path)),
       ]);
-      if (!source.equals(bundled)) differences.push(`${skill}/${path}`);
+      if (!transformPublicSkillFile(skill, path, source).equals(bundled)) {
+		differences.push(`${skill}/${path}`);
+      }
     }
   }
 
-  for (const skill of pluginSkills.filter((name) => !publicSkills.includes(name))) {
+  const publicPluginSkills = new Set(publicSkills.map(pluginSkillName));
+  for (const skill of pluginSkills.filter((name) => !publicPluginSkills.has(name))) {
     const source = await readFile(join(pluginRoot, skill, "SKILL.md"), "utf8");
     if (!source.startsWith("---\n") || !source.includes("\nmetadata:\n  internal: true\n")) {
       differences.push(`${skill} is plugin-only but not marked metadata.internal: true`);
@@ -102,9 +141,17 @@ if (checkOnly) {
   await assertDirectory(pluginRoot, "Plugin skills directory");
 
   for (const skill of await listSkillDirectories(sourceRoot)) {
-    const target = join(pluginRoot, skill);
+    const bundledSkill = pluginSkillName(skill);
+    const legacyTarget = join(pluginRoot, skill);
+    const target = join(pluginRoot, bundledSkill);
+    await rm(legacyTarget, { recursive: true, force: true });
     await rm(target, { recursive: true, force: true });
     await cp(join(sourceRoot, skill), target, { recursive: true });
+
+    for (const path of await listFiles(target)) {
+      const source = await readFile(join(target, path));
+      await writeFile(join(target, path), transformPublicSkillFile(skill, path, source));
+    }
   }
 
   const { publicSkills, pluginSkills } = await compare();

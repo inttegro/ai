@@ -124,22 +124,36 @@ for (const entry of await readdir(join(root, "plugins", "inttegro", "skills"), {
   pluginSkills.push(entry.name);
 }
 pluginSkills.sort();
-const internalPluginSkills = pluginSkills.filter((name) => !skills.includes(name));
+const publicPluginSkills = [
+  "best-practices",
+  "checkout",
+  "debug",
+  "integration",
+  "mcp",
+  "state-sync",
+  "testing",
+  "upgrade",
+];
+const internalPluginSkills = pluginSkills.filter((name) => !publicPluginSkills.includes(name));
 const requiredMerchantWorkflows = [
-  "inttegro-collect-unpaid-orders",
-  "inttegro-customer-care",
-  "inttegro-daily-brief",
-  "inttegro-files",
-  "inttegro-fulfill-and-close",
-  "inttegro-launch-offer",
-  "inttegro-message-templates",
-  "inttegro-order-desk",
-  "inttegro-payment-refund",
-  "inttegro-reconciliation",
-  "inttegro-resolve-customer-case",
-  "inttegro-sell-by-link",
+  "collect-unpaid-orders",
+  "customer-care",
+  "daily-brief",
+  "files",
+  "fulfill-and-close",
+  "launch-offer",
+  "message-templates",
+  "order-desk",
+  "payment-refund",
+  "reconciliation",
+  "resolve-customer-case",
+  "sell-by-link",
 ];
 assert(pluginSkills.length === 20, `expected 20 plugin skills, found ${pluginSkills.length}`);
+assert(
+  publicPluginSkills.every((skill) => pluginSkills.includes(skill)),
+  `plugin is missing a shortened public skill name; found ${pluginSkills.join(", ")}`,
+);
 assert(
   JSON.stringify(internalPluginSkills) === JSON.stringify(requiredMerchantWorkflows),
   `merchant workflows must remain plugin-only; found ${internalPluginSkills.join(", ")}`,
@@ -152,6 +166,20 @@ for (const skill of internalPluginSkills) {
   assert(
     source.includes("\nmetadata:\n  internal: true\n"),
     `${skill} must be marked metadata.internal: true`,
+  );
+}
+for (const skill of pluginSkills) {
+  const source = await readFile(
+    join(root, "plugins", "inttegro", "skills", skill, "SKILL.md"),
+    "utf8",
+  );
+  assert(
+    source.includes(`\nname: ${skill}\n`),
+    `plugin skill ${skill} name must match its directory`,
+  );
+  assert(
+    !skill.startsWith("inttegro-") && skill !== "inttegro" && skill !== "upgrade-inttegro",
+    `plugin skill ${skill} repeats the inttegro namespace`,
   );
 }
 

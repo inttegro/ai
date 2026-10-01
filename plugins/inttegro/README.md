@@ -43,6 +43,12 @@ npx -y @anthropic-ai/claude-code@2.1.269 --plugin-dir ./plugins/inttegro
 
 Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to see the developer and authenticated merchant skills. Read-only specialists are available as `@inttegro:commerce-analyst` and `@inttegro:customer-journey-investigator`; outcome operators are `@inttegro:sales-closer`, `@inttegro:order-operations-manager`, and `@inttegro:customer-resolution-specialist`.
 
+Claude namespaces each bundled skill with the plugin name, so commands use one
+Inttegro prefix: `/inttegro:integration`, `/inttegro:checkout`,
+`/inttegro:daily-brief`, and `/inttegro:order-desk`. The standalone skills in
+the repository root retain globally discoverable names such as
+`inttegro-checkout`; their plugin-local copies intentionally use shorter names.
+
 ## Other MCP hosts
 
 Agent Plugins 1.0 hosts can consume this package through repository marketplace

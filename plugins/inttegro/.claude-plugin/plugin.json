@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "inttegro",
   "displayName": "Inttegro",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Build Inttegro integrations and operate an authenticated merchant account from Claude with developer skills, internal workflows, read-only investigators, and action-capable operators.",
   "author": {
     "name": "Inttegro",
