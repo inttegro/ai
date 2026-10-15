@@ -4,7 +4,14 @@
   "title": "Inttegro",
   "description": "Operate an Inttegro merchant account with authenticated commerce tools and confirmed actions.",
   "version": "0.1.0",
-  "websiteUrl": "https://studio.inttegro.com/inttegro-mcp",
+  "websiteUrl": "https://studio.inttegro.dev/inttegro-mcp",
+  "icons": [
+    {
+      "src": "https://studio.inttegro.dev/img/inttegro-logo.png",
+      "mimeType": "image/png",
+      "sizes": ["256x256"]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",
