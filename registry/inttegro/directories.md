@@ -76,12 +76,12 @@ authorization flow.
 | --- | --- | --- | --- |
 | Official MCP Registry | `mcp-publisher publish registry/inttegro/server.json` | Published as `com.inttegro/mcp` version `0.1.0`; the public registry API returns the listing | Use a new version for future metadata changes; registry versions are immutable |
 | Registry consumers | Automatic ingestion from the official registry | The upstream listing is available for ingestion | Verify downstream discovery before creating duplicate manual listings |
-| Glama | `https://glama.ai/mcp/connectors` | The endpoint is compatible, but Inttegro does not expose dynamic client registration | Submit as an OAuth connector and provide a dedicated review connection; link it to the official registry entry |
-| Smithery | `https://smithery.ai/servers/new` | Sign-in and a manual publish flow are required | Submit the public repository, canonical endpoint, and listing copy |
-| mcp.so | `https://mcp.so/submit?type=server` | Manual form; paid expedited publication is optional | Use the public repository and remote-server configuration without purchasing placement unless separately approved |
-| Cursor | `https://cursor.com/marketplace/publish` | The public Agent Plugin package exists and validates locally | Submit `https://github.com/inttegro/ai/tree/master/plugins/inttegro` for review |
-| Claude | `https://claude.ai/directory/manage/new` | A Claude package and pre-registered public OAuth client exist | Run a fresh Claude OAuth and read-only-tool smoke test, then submit the single MCP connector or plugin bundle |
-| ChatGPT and Codex | `https://platform.openai.com/plugins` | The package has icons and listing metadata, but the MCP manifest does not yet declare a ChatGPT review OAuth client | Register the review client and callback, add the `com.openai` OAuth manifest extension, validate the ZIP, connect and scan tools, then submit for review |
+| Glama | `https://glama.ai/mcp/connectors` | Not discoverable in Glama search as of 2026-10-17; adding a server requires an authenticated publisher account | Sign in with the approved publisher account, submit the canonical listing, and provide a dedicated OAuth review connection |
+| Smithery | `https://smithery.ai/servers/new` | The publish route redirected to sign-in as of 2026-10-17 | Sign in with the approved publisher account and submit the public repository, canonical endpoint, and listing copy |
+| mcp.so | `https://mcp.so/submit?type=server` | The submission form offered a $39 one-time paid listing as of 2026-10-17; no free submission route was visible | Leave unsubmitted until the listing fee is explicitly approved |
+| Cursor | `https://cursor.com/marketplace/publish` | The public Agent Plugin package validates locally; marketplace publishing requires sign-in and publisher registration | Sign in with the approved publisher account and submit `https://github.com/inttegro/ai/tree/master/plugins/inttegro` for review |
+| Claude | `https://claude.ai/directory/manage/new` | A Claude package and pre-registered public OAuth client exist; the directory submission route required reauthentication as of 2026-10-17 | Reauthenticate with the approved publisher account, run a fresh OAuth and read-only-tool smoke test, then submit the plugin bundle |
+| ChatGPT and Codex | `https://platform.openai.com/plugins` | The public package now contains all four required listing URLs, icons, and interface metadata. The MCP manifest does not yet declare the registered OpenAI review client, and the publisher organization still needs payment, verification, and Apps Management access | Add the registered client under the MCP server's `extensions["com.openai"].auth` object, validate the ZIP, connect and scan tools, complete publisher prerequisites, then submit for review |
 
 Directory submission is not a substitute for client compatibility. Record the
 result of OAuth, tool discovery, one read-only call, and one confirmation-safe
@@ -102,3 +102,18 @@ write flow for each client-specific marketplace before submission.
 Publishing the registry entry, submitting directory forms, granting review
 access, and changing DNS are external actions. Review the exact payload and
 obtain explicit authorization immediately before each action.
+
+## Host-specific manifest boundaries
+
+The portable package deliberately keeps shared listing metadata in
+`.codex-plugin/plugin.json` until the full OpenAI extension is ready. If
+`plugin.json` gains `extensions.com.openai`, OpenAI treats that object as the
+complete OpenAI overlay rather than merging it with `.codex-plugin/plugin.json`.
+Do not add a partial extension.
+
+OpenAI OAuth connection settings belong to the individual server entry in
+`mcp.json`, under `extensions["com.openai"].auth`. They do not belong in the
+listing extension in `plugin.json`. Inttegro currently needs a provided client
+because the live Clerk authorization-server metadata does not advertise a
+dynamic client-registration endpoint. Never invent or commit a placeholder
+client ID as if it were usable.

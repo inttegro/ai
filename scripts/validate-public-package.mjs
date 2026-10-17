@@ -29,6 +29,19 @@ const [codexPlugin, claudePlugin] = await Promise.all([
 assert(codexPlugin.version === plugin.version, "Codex and portable plugin versions must match");
 assert(claudePlugin.version === plugin.version, "Claude and portable plugin versions must match");
 
+const requiredListingUrls = {
+  websiteURL: "https://inttegro.com/",
+  supportURL: "https://studio.inttegro.dev/inttegro-mcp",
+  privacyPolicyURL: "https://inttegro.com/privacy",
+  termsOfServiceURL: "https://inttegro.com/terms",
+};
+for (const [field, expected] of Object.entries(requiredListingUrls)) {
+  assert(
+    codexPlugin.interface?.[field] === expected,
+    `OpenAI MCP review requires interface.${field} to be ${expected}`,
+  );
+}
+
 const mcp = await readJson("plugins/inttegro/mcp.json");
 assert(
   mcp.$schema === "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
