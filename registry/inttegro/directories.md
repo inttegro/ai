@@ -74,7 +74,7 @@ authorization flow.
 
 | Destination | Submission path | Current state | Next action |
 | --- | --- | --- | --- |
-| Official MCP Registry | `mcp-publisher publish registry/inttegro/server.json` | Version `0.1.1` adds the public `https://github.com/inttegro/ai` repository required by GitHub's registry review | Republish version `0.1.1`, verify the public registry response, then ask GitHub to rerun review 168176 |
+| Official MCP Registry | `mcp-publisher publish registry/inttegro/server.json` | Version `0.1.1` was published and verified on 2026-10-20 as active and latest, with the public `https://github.com/inttegro/ai` repository required by GitHub's registry review | Ask GitHub to rerun review 168176 |
 | Registry consumers | Automatic ingestion from the official registry | The upstream listing is available for ingestion | Verify downstream discovery before creating duplicate manual listings |
 | Glama | `https://glama.ai/mcp/connectors` | Not discoverable in Glama search as of 2026-10-17; adding a server requires an authenticated publisher account | Sign in with the approved publisher account, submit the canonical listing, and provide a dedicated OAuth review connection |
 | Smithery | `https://smithery.ai/servers/new` | The publish route redirected to sign-in as of 2026-10-17 | Sign in with the approved publisher account and submit the public repository, canonical endpoint, and listing copy |
