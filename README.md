@@ -25,6 +25,25 @@ https://mcp.inttegro.com/
 
 Compatible clients authenticate with OAuth. The service checks the selected organization, membership, and granular Inttegro scopes on every request. API keys remain a separate workload credential for headless integrations and should never be pasted into an interactive AI conversation.
 
+### Connect an MCP client
+
+Use the hosted Streamable HTTP endpoint; there is no local server to install:
+
+```json
+{
+  "mcpServers": {
+    "inttegro": {
+      "url": "https://mcp.inttegro.com/"
+    }
+  }
+}
+```
+
+Open the connection in a compatible client and complete the Inttegro OAuth
+flow. The tools then operate on the organization selected during authorization.
+See the [connection guide](plugins/inttegro/README.md) for supported client
+packages and usage guidance.
+
 ## Install Inttegro skills
 
 Install the full Inttegro developer skill collection with the open-source `skills` CLI:

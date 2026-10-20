@@ -55,7 +55,12 @@ assert(
 
 const server = await readJson("registry/inttegro/server.json");
 assert(server.name === "com.inttegro/mcp", "registry namespace must be com.inttegro/mcp");
-assert(server.version === "0.1.0", "registry version must match the MCP implementation version");
+assert(server.version === "0.1.1", "registry version must match the published metadata version");
+assert(
+  server.repository?.url === "https://github.com/inttegro/ai" &&
+    server.repository.source === "github",
+  "registry metadata must advertise the public Inttegro AI repository",
+);
 assert(
   server.remotes?.some(
     (remote) =>

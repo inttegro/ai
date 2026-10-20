@@ -10,7 +10,7 @@ but do not introduce capabilities that are absent from the server.
 | --- | --- |
 | Name | Inttegro |
 | Registry name | `com.inttegro/mcp` |
-| Version | `0.1.0` |
+| Version | `0.1.1` |
 | Endpoint | `https://mcp.inttegro.com/` |
 | Transport | Streamable HTTP |
 | Authentication | OAuth 2.1 |
@@ -74,7 +74,7 @@ authorization flow.
 
 | Destination | Submission path | Current state | Next action |
 | --- | --- | --- | --- |
-| Official MCP Registry | `mcp-publisher publish registry/inttegro/server.json` | Published as `com.inttegro/mcp` version `0.1.0`; the public registry API returns the listing | Use a new version for future metadata changes; registry versions are immutable |
+| Official MCP Registry | `mcp-publisher publish registry/inttegro/server.json` | Version `0.1.1` adds the public `https://github.com/inttegro/ai` repository required by GitHub's registry review | Republish version `0.1.1`, verify the public registry response, then ask GitHub to rerun review 168176 |
 | Registry consumers | Automatic ingestion from the official registry | The upstream listing is available for ingestion | Verify downstream discovery before creating duplicate manual listings |
 | Glama | `https://glama.ai/mcp/connectors` | Not discoverable in Glama search as of 2026-10-17; adding a server requires an authenticated publisher account | Sign in with the approved publisher account, submit the canonical listing, and provide a dedicated OAuth review connection |
 | Smithery | `https://smithery.ai/servers/new` | The publish route redirected to sign-in as of 2026-10-17 | Sign in with the approved publisher account and submit the public repository, canonical endpoint, and listing copy |
@@ -91,9 +91,12 @@ write flow for each client-specific marketplace before submission.
 
 - `https://mcp.inttegro.com/readyz` reports ready.
 - `server.json` passes the repository validator and the live registry validator.
+- The public repository URL resolves and its README explains the hosted server,
+  OAuth connection, configuration, and developer resources.
 - The `com.inttegro` namespace is authenticated through the official registry's
   DNS method with a Google Cloud KMS signing key.
-- The registry version matches the deployed MCP release version.
+- A metadata change uses a new immutable registry version and preserves the
+  deployed endpoint contract.
 - A new user can complete OAuth and call a read-only tool from an external MCP
   client.
 - Any reviewer credentials grant access only to a dedicated review account with
