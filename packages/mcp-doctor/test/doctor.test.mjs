@@ -121,6 +121,13 @@ test("discovers every authenticated tool page without exposing the token", async
   const catalog = report.checks.find((check) => check.id === "tool-catalog");
   assert.equal(catalog.status, "pass");
   assert.match(catalog.summary, /2 authenticated tools/);
+  assert.deepEqual(report.catalog, {
+    server: { name: "fixture", version: "1" },
+    protocolVersion,
+    capabilities: {},
+    toolCount: 2,
+    tools: ["get_order", "list_orders"],
+  });
   assert.doesNotMatch(JSON.stringify(report), new RegExp(token));
 });
 

@@ -26,8 +26,11 @@ INTTEGRO_TEST_TOKEN=replace_me \
   --token-env INTTEGRO_TEST_TOKEN
 ```
 
-Use `--json` to create a machine-readable, redacted support report. Do not save
-the environment variable in shell history, source control, or an issue.
+Use `--json` to create a machine-readable, redacted support report. When an
+authenticated catalog is available, the report includes a structured
+`catalog.tools` array for contract-drift checks; it still never invokes a tool.
+Do not save the environment variable in shell history, source control, or an
+issue.
 
 ## Develop
 

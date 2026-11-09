@@ -1,6 +1,6 @@
 {
   "name": "@inttegro/mcp-doctor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Read-only diagnostics for the Inttegro MCP endpoint, OAuth metadata, and authenticated tool discovery.",
   "type": "module",
   "license": "MIT",

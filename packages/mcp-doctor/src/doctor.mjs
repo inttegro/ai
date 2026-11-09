@@ -80,13 +80,13 @@ async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeout
         `Authenticated initialization returned HTTP ${initialize.status}`,
       ),
     );
-    return;
+    return undefined;
   }
 
   const payload = await responsePayload(initialize);
   if (!payload?.result || payload.error) {
     checks.push(result("authenticated-initialize", "fail", "Initialization returned no MCP result"));
-    return;
+    return undefined;
   }
 
   const sessionId = initialize.headers.get("mcp-session-id") || undefined;
@@ -125,13 +125,13 @@ async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeout
 
     if (!response.ok) {
       checks.push(result("tool-catalog", "fail", `Tool discovery returned HTTP ${response.status}`));
-      return;
+      return undefined;
     }
 
     const pagePayload = await responsePayload(response);
     if (!Array.isArray(pagePayload?.result?.tools)) {
       checks.push(result("tool-catalog", "fail", "Tool discovery returned no tools array"));
-      return;
+      return undefined;
     }
 
     toolNames.push(...pagePayload.result.tools.map((tool) => tool.name).filter(Boolean));
@@ -139,7 +139,7 @@ async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeout
     if (!cursor) break;
     if (page === 19) {
       checks.push(result("tool-pagination", "fail", "Tool discovery exceeded 20 pages"));
-      return;
+      return undefined;
     }
   }
 
@@ -151,6 +151,15 @@ async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeout
       toolNames.length ? toolNames.sort().join(", ") : undefined,
     ),
   );
+
+  const tools = [...new Set(toolNames)].sort();
+  return {
+    server: payload.result.serverInfo ?? null,
+    protocolVersion: payload.result.protocolVersion ?? null,
+    capabilities: payload.result.capabilities ?? {},
+    toolCount: tools.length,
+    tools,
+  };
 }
 
 export async function runDoctor({
@@ -161,6 +170,7 @@ export async function runDoctor({
   fetchImpl = fetch,
 } = {}) {
   const checks = [];
+  let catalog;
   let endpointUrl;
 
   try {
@@ -305,7 +315,13 @@ export async function runDoctor({
 
   if (token) {
     try {
-      await inspectAuthenticatedCatalog({ fetchImpl, endpoint: endpointUrl, token, timeoutMs, checks });
+      catalog = await inspectAuthenticatedCatalog({
+        fetchImpl,
+        endpoint: endpointUrl,
+        token,
+        timeoutMs,
+        checks,
+      });
     } catch (error) {
       checks.push(
         result(
@@ -332,6 +348,7 @@ export async function runDoctor({
     protocolVersion,
     authenticated: Boolean(token),
     ...(tokenSource ? { tokenSource } : {}),
+    ...(catalog ? { catalog } : {}),
     checks,
     summary: summarize(checks),
   };
