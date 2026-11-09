@@ -28,6 +28,20 @@ const [codexPlugin, claudePlugin] = await Promise.all([
 ]);
 assert(codexPlugin.version === plugin.version, "Codex and portable plugin versions must match");
 assert(claudePlugin.version === plugin.version, "Claude and portable plugin versions must match");
+const claudeMarketplace = await readJson(".claude-plugin/marketplace.json");
+assert(
+  claudeMarketplace.plugins?.find((entry) => entry.name === "inttegro")?.version === plugin.version,
+  "Claude marketplace and portable plugin versions must match",
+);
+const changelog = await readFile(join(root, "plugins", "inttegro", "CHANGELOG.md"), "utf8");
+assert(
+  changelog.includes(`\n## ${plugin.version} `),
+  `plugin changelog must include current version ${plugin.version}`,
+);
+assert(
+  (await stat(join(root, "plugins", "inttegro", "RELEASING.md")).catch(() => null))?.isFile(),
+  "plugin must document its release evidence process",
+);
 
 const requiredListingUrls = {
   websiteURL: "https://inttegro.com/",

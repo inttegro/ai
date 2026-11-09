@@ -71,6 +71,8 @@ no bearer token, API key, or reusable merchant credential.
 
 ## Support
 
+- [Changelog](CHANGELOG.md)
+- [Release process](RELEASING.md)
 - [Documentation](https://studio.inttegro.dev/inttegro-mcp)
 - [Privacy policy](https://inttegro.com/privacy)
 - [Terms of service](https://inttegro.com/terms)
