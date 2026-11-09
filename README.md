@@ -14,6 +14,7 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 | [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/ai`](package.json) | One CLI for read-only MCP diagnostics and maintainer routing evaluations. | Source release |
+| [Inttegro for Visual Studio Code](extensions/vscode) | Registers the hosted MCP server and provides connectivity and developer-navigation commands. | Source release |
 | [Shop with Inttegro](products/shop-with-inttegro) | Consumer product discovery, authoritative product hydration, secure Checkout handoff, and minimized purchase status. | Activation-gated; not installable yet |
 | [AI evaluation contracts](evals) | Versioned skill and agent routing cases plus MCP profile tool-coverage gates. | Enforced in CI |
 
@@ -90,6 +91,7 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 - `products/` — product-level AI experiences and their activation contracts.
 - `skills/` — public developer skills for building and maintaining Inttegro integrations.
 - `bin/` and `src/` — the single `@inttegro/ai` command-line package.
+- `extensions/` — host-native developer integrations that add capabilities beyond a registry listing.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
 - `contracts/` — versioned MCP profile and capability contracts.
 - `evals/` — routing and tool-coverage evaluation inputs.

@@ -31,6 +31,12 @@ jobs:
           npm run check
           npm test
           npm run pack:check
+      - name: Test Visual Studio Code extension
+        run: |
+          npm --prefix extensions/vscode ci
+          npm --prefix extensions/vscode run check
+          npm --prefix extensions/vscode test
+          npm --prefix extensions/vscode run package
       - name: Validate Claude marketplace
         run: npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
       - name: Validate Inttegro plugin

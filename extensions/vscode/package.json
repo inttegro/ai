@@ -1,0 +1,103 @@
+{
+  "name": "inttegro",
+  "displayName": "Inttegro",
+  "description": "Build and operate Inttegro commerce integrations with the hosted Inttegro MCP server.",
+  "version": "0.1.0",
+  "publisher": "inttegro",
+  "license": "MIT",
+  "pricing": "Free",
+  "homepage": "https://studio.inttegro.dev/inttegro-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inttegro/ai.git",
+    "directory": "extensions/vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/inttegro/ai/issues"
+  },
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#050505",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.140.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "inttegro",
+    "commerce",
+    "payments",
+    "checkout",
+    "orders",
+    "mcp",
+    "copilot",
+    "agents"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "files": [
+    "assets/icon.png",
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "SUPPORT.md"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "inttegro.checkMcpService",
+        "title": "Check MCP service",
+        "category": "Inttegro"
+      },
+      {
+        "command": "inttegro.openDocumentation",
+        "title": "Open developer documentation",
+        "category": "Inttegro"
+      },
+      {
+        "command": "inttegro.openStudio",
+        "title": "Open Studio",
+        "category": "Inttegro"
+      }
+    ],
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "inttegro.mcp",
+        "label": "Inttegro"
+      }
+    ]
+  },
+  "scripts": {
+    "sync-assets": "node scripts/sync-assets.mjs",
+    "prepare": "npm run sync-assets && npm run compile",
+    "compile": "tsc -p ./",
+    "check": "tsc -p ./ --noEmit",
+    "test": "npm run compile && node --test test/*.test.cjs",
+    "package": "npm run sync-assets && vsce package --no-dependencies",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/vscode": "^1.140.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^7.0.2"
+  }
+}
