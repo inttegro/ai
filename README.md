@@ -14,6 +14,8 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 | [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
+| [Shop with Inttegro](products/shop-with-inttegro) | Consumer product discovery, authoritative product hydration, secure Checkout handoff, and minimized purchase status. | Activation-gated; not installable yet |
+| [AI evaluation contracts](evals) | Versioned skill and agent routing cases plus MCP profile tool-coverage gates. | Enforced in CI |
 
 ## Inttegro MCP
 
@@ -72,9 +74,12 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 ## Repository structure
 
 - `plugins/` — installable agent plugins and their host manifests.
+- `products/` — product-level AI experiences and their activation contracts.
 - `skills/` — public developer skills for building and maintaining Inttegro integrations.
 - `packages/` — libraries and protocol adapters suitable for independent versioning.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
+- `contracts/` — versioned MCP profile and capability contracts.
+- `evals/` — routing and tool-coverage evaluation inputs.
 - `.claude-plugin/` and `.codex-plugin/` — marketplace metadata for supported hosts.
 - `registry/` — versioned discovery metadata for the official MCP Registry.
 - `scripts/` — dependency-free consistency and package validation.

@@ -24,6 +24,8 @@ jobs:
         run: |
           node scripts/validate-public-package.mjs
           node scripts/sync-skills.mjs --check
+          node scripts/validate-tool-coverage.mjs
+          node scripts/validate-skill-routing.mjs
       - name: Test MCP doctor
         run: |
           npm --prefix packages/mcp-doctor run check

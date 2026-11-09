@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "skills": [
+    {
+      "name": "best-practices",
+      "should_trigger": [
+        "Review this Inttegro API integration for production-safe authentication, idempotency, pagination, and logging."
+      ],
+      "should_not_trigger": [
+        "Show me today's merchant sales totals and the orders that need attention."
+      ],
+      "ambiguous": [
+        "Help me make our first Inttegro integration reliable before launch."
+      ]
+    },
+    {
+      "name": "checkout",
+      "should_trigger": [
+        "Implement hosted Inttegro Checkout and verify payment after the success redirect."
+      ],
+      "should_not_trigger": [
+        "Create a hosted buy link for this already published product and active price."
+      ],
+      "ambiguous": [
+        "Our customer needs a secure way to pay for this product."
+      ]
+    },
+    {
+      "name": "collect-unpaid-orders",
+      "should_trigger": [
+        "Find all payment-pending orders, let me choose which customers to contact, and reconcile the results."
+      ],
+      "should_not_trigger": [
+        "Take payment for this one order using the customer's selected saved method."
+      ],
+      "ambiguous": [
+        "Help me recover revenue from orders that have not been paid."
+      ]
+    },
+    {
+      "name": "customer-care",
+      "should_trigger": [
+        "Find this customer, review their recent commerce activity, and send one consented SMS."
+      ],
+      "should_not_trigger": [
+        "Investigate this customer's failed payment and refund the affected line item."
+      ],
+      "ambiguous": [
+        "A customer needs help with their account and recent order."
+      ]
+    },
+    {
+      "name": "daily-brief",
+      "should_trigger": [
+        "Give me a numbers-first morning brief with sales, balances, payouts, top products, and exceptions."
+      ],
+      "should_not_trigger": [
+        "Explain why this specific payout failed and reconcile it to balance transactions."
+      ],
+      "ambiguous": [
+        "How is the business doing and what needs my attention?"
+      ]
+    },
+    {
+      "name": "debug",
+      "should_trigger": [
+        "Diagnose why our Inttegro MCP OAuth flow returns an insufficient-scope error after consent."
+      ],
+      "should_not_trigger": [
+        "Connect Inttegro MCP to my coding agent for the first time."
+      ],
+      "ambiguous": [
+        "Our Inttegro integration does not work in production."
+      ]
+    },
+    {
+      "name": "files",
+      "should_trigger": [
+        "Upload this selected invoice attachment, create a customer-facing link, and later revoke it."
+      ],
+      "should_not_trigger": [
+        "Send the finalized order invoice to its saved customer."
+      ],
+      "ambiguous": [
+        "I need to share a document with a customer securely."
+      ]
+    },
+    {
+      "name": "fulfill-and-close",
+      "should_trigger": [
+        "Find paid orders that are still incomplete, let me confirm fulfillment, complete them, and send receipts."
+      ],
+      "should_not_trigger": [
+        "Cancel this unpaid order and explain whether a refund will happen."
+      ],
+      "ambiguous": [
+        "Clear the orders that have already been fulfilled."
+      ]
+    },
+    {
+      "name": "integration",
+      "should_trigger": [
+        "Choose the right Inttegro API, SDK, Checkout, and MCP surfaces and build our first end-to-end workflow."
+      ],
+      "should_not_trigger": [
+        "Upgrade our existing Inttegro TypeScript SDK and remove deprecated calls."
+      ],
+      "ambiguous": [
+        "Help us add Inttegro to our application."
+      ]
+    },
+    {
+      "name": "launch-offer",
+      "should_trigger": [
+        "Create a new service product and price, publish it, and make a hosted buy link after I approve each term."
+      ],
+      "should_not_trigger": [
+        "Create another buy link for this existing published product and active price."
+      ],
+      "ambiguous": [
+        "I want to start selling a new consulting package."
+      ]
+    },
+    {
+      "name": "mcp",
+      "should_trigger": [
+        "Configure the remote Inttegro MCP server in this agent host and handle OAuth and confirmation capabilities."
+      ],
+      "should_not_trigger": [
+        "Diagnose a validation error from a direct Inttegro HTTP API request."
+      ],
+      "ambiguous": [
+        "Build an agent that can work with our Inttegro account."
+      ]
+    },
+    {
+      "name": "message-templates",
+      "should_trigger": [
+        "Draft, preview, publish, and send a reusable order-ready email template to one saved customer."
+      ],
+      "should_not_trigger": [
+        "Send a one-off consented SMS to this existing customer."
+      ],
+      "ambiguous": [
+        "We need a reusable customer notification for order updates."
+      ]
+    },
+    {
+      "name": "order-desk",
+      "should_trigger": [
+        "Show the latest state of this order, then send its finalized invoice to the saved customer."
+      ],
+      "should_not_trigger": [
+        "Charge this order using the second masked saved payment method."
+      ],
+      "ambiguous": [
+        "Help me deal with this order and keep the customer informed."
+      ]
+    },
+    {
+      "name": "payment-refund",
+      "should_trigger": [
+        "Show masked payment choices for this order, charge the selected method, and reconcile the result."
+      ],
+      "should_not_trigger": [
+        "List payment-pending orders and let me decide which customers should receive a reminder."
+      ],
+      "ambiguous": [
+        "The customer says the payment is wrong and wants money back."
+      ]
+    },
+    {
+      "name": "reconciliation",
+      "should_trigger": [
+        "Explain the difference between our available balance, balance transactions, and this failed payout."
+      ],
+      "should_not_trigger": [
+        "Give me a broad daily performance summary across orders, products, customers, and messages."
+      ],
+      "ambiguous": [
+        "Where is our money and why has it not reached the bank?"
+      ]
+    },
+    {
+      "name": "resolve-customer-case",
+      "should_trigger": [
+        "Investigate this customer's order, failed payment, messages, and refund options, then apply the resolution I choose."
+      ],
+      "should_not_trigger": [
+        "Update this customer's display name and send one routine consented SMS."
+      ],
+      "ambiguous": [
+        "Own this customer complaint through investigation and resolution."
+      ]
+    },
+    {
+      "name": "sell-by-link",
+      "should_trigger": [
+        "Create a single-use buy link for this existing published product and active price, then send it to the saved customer."
+      ],
+      "should_not_trigger": [
+        "Create the new product and price before publishing an offer for the first time."
+      ],
+      "ambiguous": [
+        "Give this customer a secure link to buy the product."
+      ]
+    },
+    {
+      "name": "shop",
+      "should_trigger": [
+        "Find a locally made gift under fifty dollars, compare current options, and open secure checkout for the one I select."
+      ],
+      "should_not_trigger": [
+        "Publish a merchant product and create a reusable buy link for it."
+      ],
+      "ambiguous": [
+        "Can you help me find and buy a good running shoe?"
+      ]
+    },
+    {
+      "name": "state-sync",
+      "should_trigger": [
+        "Design bounded polling and idempotent reconciliation for pending Inttegro payment and refund states."
+      ],
+      "should_not_trigger": [
+        "Investigate why our existing status poller is timing out in production."
+      ],
+      "ambiguous": [
+        "Keep our application synchronized with Inttegro order changes."
+      ]
+    },
+    {
+      "name": "testing",
+      "should_trigger": [
+        "Create contract, idempotency, failure-injection, checkout, and live end-to-end tests for this integration."
+      ],
+      "should_not_trigger": [
+        "Find the root cause of this one failing Inttegro production request."
+      ],
+      "ambiguous": [
+        "Make sure our Inttegro integration is ready for production."
+      ]
+    },
+    {
+      "name": "upgrade",
+      "should_trigger": [
+        "Upgrade the Inttegro Go SDK, regenerate types, remove deprecated usage, and verify behavioral changes."
+      ],
+      "should_not_trigger": [
+        "Implement our first Inttegro integration in a new application."
+      ],
+      "ambiguous": [
+        "Bring this old Inttegro integration up to date safely."
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "name": "commerce-analyst",
+      "should_trigger": [
+        "Delegate a read-only multi-source analysis of sales, balances, payouts, and message performance."
+      ],
+      "should_not_trigger": [
+        "Create a product, price, and buy link for a new offer."
+      ],
+      "ambiguous": [
+        "Have a specialist explain what changed across the business this week."
+      ]
+    },
+    {
+      "name": "customer-journey-investigator",
+      "should_trigger": [
+        "Delegate a read-only trace across this customer's explicit order, message, product, price, and buy-link IDs."
+      ],
+      "should_not_trigger": [
+        "Send a message and issue a refund to resolve this customer case."
+      ],
+      "ambiguous": [
+        "Have a specialist reconstruct what happened to this customer without changing anything."
+      ]
+    },
+    {
+      "name": "customer-resolution-specialist",
+      "should_trigger": [
+        "Delegate this one support case for investigation and the exact approved payment, message, or refund follow-up."
+      ],
+      "should_not_trigger": [
+        "Analyze customer trends across the whole merchant account without changing records."
+      ],
+      "ambiguous": [
+        "Have a specialist take this customer complaint through to a safe resolution."
+      ]
+    },
+    {
+      "name": "order-operations-manager",
+      "should_trigger": [
+        "Delegate an order queue to amend drafts, finalize, send invoices, complete fulfilled orders, and send receipts."
+      ],
+      "should_not_trigger": [
+        "Charge an order or create a line-item refund."
+      ],
+      "ambiguous": [
+        "Have an operator clear the routine order work waiting today."
+      ]
+    },
+    {
+      "name": "sales-closer",
+      "should_trigger": [
+        "Delegate one explicit customer opportunity through product selection, order or buy link, invoice, and approved payment attempt."
+      ],
+      "should_not_trigger": [
+        "Send a marketing campaign to every customer in the account."
+      ],
+      "ambiguous": [
+        "Have a specialist carry this qualified sale across the required Inttegro records."
+      ]
+    }
+  ],
+  "overlap_cases": [
+    {
+      "prompt": "Set up a brand-new product and price, publish it, then create its first hosted buy link.",
+      "expected": [
+        "launch-offer"
+      ],
+      "reason": "New commercial terms belong to offer setup, not routine buy-link lifecycle work."
+    },
+    {
+      "prompt": "Create another hosted buy link for an existing published product and active price.",
+      "expected": [
+        "sell-by-link"
+      ],
+      "reason": "The product and price already exist, so only link lifecycle work is required."
+    },
+    {
+      "prompt": "Investigate one customer's failed payment and messages, then refund the exact line I approve.",
+      "expected": [
+        "resolve-customer-case"
+      ],
+      "reason": "The request spans evidence and action across one support case rather than only payment execution."
+    },
+    {
+      "prompt": "List unpaid orders, let me select the recovery candidates, and prepare approved follow-up actions.",
+      "expected": [
+        "collect-unpaid-orders"
+      ],
+      "reason": "This is a queue-level revenue recovery workflow, not a single-order charge."
+    },
+    {
+      "prompt": "Implement hosted checkout and add contract, redirect, idempotency, and failure-recovery tests.",
+      "expected": [
+        "checkout",
+        "testing"
+      ],
+      "reason": "The request explicitly combines a checkout implementation with a test strategy."
+    },
+    {
+      "prompt": "Find a published product for me to buy and open checkout after I select the exact option.",
+      "expected": [
+        "shop"
+      ],
+      "reason": "This is consumer discovery and purchase handoff, not merchant catalog or buy-link administration."
+    },
+    {
+      "prompt": "Explain today's broad performance, then investigate why one returned payout failed.",
+      "expected": [
+        "daily-brief",
+        "reconciliation"
+      ],
+      "reason": "The request contains both a business-wide brief and a focused money reconciliation."
+    },
+    {
+      "prompt": "Configure Inttegro MCP in this host and diagnose why its OAuth connection is missing tool scopes.",
+      "expected": [
+        "mcp",
+        "debug"
+      ],
+      "reason": "Connection setup and evidence-led failure diagnosis are both explicitly requested."
+    }
+  ]
+}

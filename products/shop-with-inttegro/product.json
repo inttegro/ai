@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "shop-with-inttegro",
+  "display_name": "Shop with Inttegro",
+  "status": "activation-gated",
+  "mcp_endpoint": "https://mcp.inttegro.com/",
+  "mcp_profile": "consumer",
+  "workflow_roots": [
+    "skills"
+  ],
+  "required_tools": [
+    "search_products",
+    "get_product",
+    "create_checkout",
+    "get_purchase_status"
+  ],
+  "activation_gates": [
+    "Deploy and backfill public product search.",
+    "Deploy authoritative public product hydration.",
+    "Deploy checkout handoff and opaque purchase receipt contracts.",
+    "Allowlist the reviewed consumer OAuth client ID.",
+    "Pass provider and cross-surface conformance tests."
+  ]
+}
