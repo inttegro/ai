@@ -10,7 +10,7 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 
 | Project | Description | Status |
 | --- | --- | --- |
-| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with live Inttegro tools, eight developer skills, twelve internal merchant workflows, five specialist agents, and MCP Apps metadata. | Public source; directory reviews pending |
+| [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with live Inttegro tools, eight developer skills, twelve internal merchant workflows, ten specialist agents, and MCP Apps metadata. | Public source; directory reviews pending |
 | [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
 | [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |

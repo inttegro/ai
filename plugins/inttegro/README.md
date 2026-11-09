@@ -2,8 +2,8 @@
 
 This plugin connects Claude, ChatGPT, Codex, GitHub Copilot, VS Code, and other
 compatible agent hosts to the shared Inttegro MCP service. It combines live,
-account-scoped commerce tools with merchant workflow skills, read-only Claude
-specialists, and portable MCP Apps metadata.
+account-scoped commerce tools with merchant workflow skills, narrowly
+permissioned Claude specialists, and portable MCP Apps metadata.
 
 ## What merchants can do
 
@@ -23,7 +23,7 @@ The plugin never asks for raw card details, OTP codes, or an Inttegro API key in
 - A root `plugin.json` and `mcp.json` using the portable Agent Plugins 1.0 format.
 - Eight public developer skills synchronized from the repository-root `skills/` directory.
 - Twelve authenticated merchant workflows marked internal so they ship with the plugin without appearing in skills.sh discovery.
-- Five Claude specialists: two read-only investigators plus action-capable sales, order-operations, and customer-resolution operators.
+- Ten Claude specialists: read-only business, journey, and finance investigators plus action-capable catalog, revenue-recovery, messaging, file, sales, order-operations, and customer-resolution operators.
 - One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`; the
   Claude-compatible `.mcp.json` also carries its registered public OAuth client.
 - Compatibility metadata and artwork for Claude and OpenAI plugin hosts.
@@ -41,7 +41,12 @@ npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --stri
 npx -y @anthropic-ai/claude-code@2.1.269 --plugin-dir ./plugins/inttegro
 ```
 
-Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to see the developer and authenticated merchant skills. Read-only specialists are available as `@inttegro:commerce-analyst` and `@inttegro:customer-journey-investigator`; outcome operators are `@inttegro:sales-closer`, `@inttegro:order-operations-manager`, and `@inttegro:customer-resolution-specialist`.
+Inside Claude Code, open `/mcp` and complete Inttegro sign-in. Run `/help` to
+see the developer and authenticated merchant skills. Specialists are available
+for business analysis, customer journeys, finance reconciliation, catalog
+operations, revenue recovery, messaging, secure file delivery, sales, order
+operations, and customer resolution. Invoke them through the
+`@inttegro:<agent-name>` namespace.
 
 Claude namespaces each bundled skill with the plugin name, so commands use one
 Inttegro prefix: `/inttegro:integration`, `/inttegro:checkout`,
