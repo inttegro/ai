@@ -1,6 +1,7 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, relative, resolve, sep } from "node:path";
 
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }

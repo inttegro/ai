@@ -1,4 +1,5 @@
 let source = "";
+
 for await (const chunk of process.stdin) source += chunk;
 const input = JSON.parse(source);
 const { expectation } = input.case;

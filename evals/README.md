@@ -33,7 +33,7 @@ Create a redacted report with a short-lived test OAuth token:
 
 ```bash
 INTTEGRO_TEST_TOKEN=replace_me \
-  node packages/mcp-doctor/bin/inttegro-mcp-doctor.mjs \
+  npx @inttegro/ai doctor \
   --token-env INTTEGRO_TEST_TOKEN --json > /tmp/inttegro-mcp-report.json
 
 node scripts/validate-tool-coverage.mjs \
@@ -45,11 +45,11 @@ Use an account and OAuth client whose expected profile matches `--profile`.
 
 ## Execute the model evaluation
 
-`@inttegro/routing-evals` runs this corpus through a provider- or host-specific
+`@inttegro/ai` runs this corpus through a provider- or host-specific
 adapter and produces a consistent JSONL artifact:
 
 ```bash
-node packages/routing-evals/bin/inttegro-routing-eval.mjs \
+npx @inttegro/ai eval routing \
   --adapter node \
   --adapter-arg /absolute/path/to/your-host-adapter.mjs \
   --provider your-provider \
@@ -65,7 +65,7 @@ The runner supplies the full installed skill and agent catalog so the host is
 tested under realistic routing pressure. It scores positive, negative,
 ambiguous, and exact overlap cases, records repetitions, and exits nonzero when
 the configured minimum score is missed or an adapter fails. See the
-[package protocol](../packages/routing-evals/README.md) before implementing an
+[routing protocol](../docs/routing-evaluations.md) before implementing an
 adapter.
 
 Do not report static validation as model-evaluation evidence. Every executable

@@ -83,24 +83,34 @@ assert(
   "registry metadata must advertise the canonical Streamable HTTP endpoint",
 );
 
-const routingEvals = await readJson("packages/routing-evals/package.json");
-assert(routingEvals.name === "@inttegro/routing-evals", "routing eval package name must be stable");
-assert(routingEvals.version === "0.1.0", "routing eval package version must match its source release");
+const aiPackage = await readJson("package.json");
+assert(aiPackage.name === "@inttegro/ai", "public npm package name must be @inttegro/ai");
+assert(aiPackage.version === "0.1.0", "public npm package version must match its source release");
+assert(aiPackage.publishConfig?.access === "public", "public npm package must publish with public access");
 assert(
-  routingEvals.bin?.["inttegro-routing-eval"] === "./bin/inttegro-routing-eval.mjs",
-  "routing eval package must expose inttegro-routing-eval",
+  aiPackage.bin?.["inttegro-ai"] === "./bin/inttegro-ai.mjs",
+  "public npm package must expose the inttegro-ai command",
 );
-assert(routingEvals.engines?.node === ">=22", "routing eval package must require Node 22 or newer");
+assert(aiPackage.engines?.node === ">=22", "public npm package must require Node 22 or newer");
+const aiChangelog = await readFile(join(root, "CHANGELOG.md"), "utf8");
+assert(
+  aiChangelog.includes(`\n## ${aiPackage.version} `),
+  `public npm package changelog must include current version ${aiPackage.version}`,
+);
 for (const path of [
-  "packages/routing-evals/README.md",
-  "packages/routing-evals/LICENSE",
-  "packages/routing-evals/bin/inttegro-routing-eval.mjs",
-  "packages/routing-evals/src/cli.mjs",
-  "packages/routing-evals/src/corpus.mjs",
-  "packages/routing-evals/src/evaluator.mjs",
-  "packages/routing-evals/src/process-adapter.mjs",
+  "CHANGELOG.md",
+  "bin/inttegro-ai.mjs",
+  "docs/mcp-doctor.md",
+  "docs/routing-evaluations.md",
+  "src/cli.mjs",
+  "src/doctor/cli.mjs",
+  "src/doctor/doctor.mjs",
+  "src/routing/cli.mjs",
+  "src/routing/corpus.mjs",
+  "src/routing/evaluator.mjs",
+  "src/routing/process-adapter.mjs",
 ]) {
-  assert((await stat(join(root, path)).catch(() => null))?.isFile(), `routing eval package is missing ${path}`);
+  assert((await stat(join(root, path)).catch(() => null))?.isFile(), `public npm package is missing ${path}`);
 }
 
 const skills = [];

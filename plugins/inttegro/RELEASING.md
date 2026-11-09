@@ -17,11 +17,9 @@ node scripts/validate-public-package.mjs
 node scripts/sync-skills.mjs --check
 node scripts/validate-tool-coverage.mjs
 node scripts/validate-skill-routing.mjs
-npm --prefix packages/mcp-doctor run check
-npm --prefix packages/mcp-doctor test
-npm --prefix packages/routing-evals run check
-npm --prefix packages/routing-evals test
-npm --prefix packages/routing-evals run pack:check
+npm run check
+npm test
+npm run pack:check
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
 ```
@@ -37,7 +35,7 @@ node scripts/validate-tool-coverage.mjs \
 ## 2. Collect host evidence
 
 Run the versioned routing corpus through each supported host or provider using
-`@inttegro/routing-evals`. Use a test organization for adapters that can invoke
+`npx @inttegro/ai eval routing`. Use a test organization for adapters that can invoke
 live tools. Store the JSONL reports in an approved evidence location, not this
 public repository.
 

@@ -26,9 +26,9 @@ node scripts/validate-public-package.mjs
 node scripts/sync-skills.mjs --check
 node scripts/validate-tool-coverage.mjs
 node scripts/validate-skill-routing.mjs
-npm --prefix packages/routing-evals run check
-npm --prefix packages/routing-evals test
-npm --prefix packages/routing-evals run pack:check
+npm run check
+npm test
+npm run pack:check
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
 ```
@@ -58,7 +58,7 @@ allowlisted for the isolated consumer profile.
 
 Host-executed routing evidence belongs in a private or explicitly approved
 artifact location, not in this source repository. Use
-`@inttegro/routing-evals` to record the provider, model, host version, plugin
+`npx @inttegro/ai eval routing` to record the provider, model, host version, plugin
 revision, locale, region, token provenance, latency, selected units, tool
 sequence, and semantic outcome. Do not store chain-of-thought, credentials,
 customer data, or raw production tool payloads.

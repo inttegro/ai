@@ -1,15 +1,18 @@
 import { randomUUID } from "node:crypto";
 import { chmod, lstat, mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { loadRoutingSuite } from "./corpus.mjs";
 import { runEvaluation, summarizeResults } from "./evaluator.mjs";
 import { createProcessAdapter } from "./process-adapter.mjs";
 
+const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
+
 const help = `Inttegro routing evaluations
 
 Usage:
-  inttegro-routing-eval --adapter COMMAND --provider NAME --model NAME \\
+  inttegro-ai eval routing --adapter COMMAND --provider NAME --model NAME \\
     --host NAME --host-version VERSION --plugin-revision SHA \\
     --execution-region REGION [options]
 
@@ -24,7 +27,7 @@ Required options:
 
 Options:
   --adapter-arg VALUE        Pass one argument to the adapter; repeat as needed
-  --root PATH                Inttegro AI repository root (default: current directory)
+  --root PATH                Alternate Inttegro AI source root (default: installed package)
   --corpus PATH              Routing corpus (default: <root>/evals/routing.json)
   --output PATH              Write JSONL to a file instead of stdout
   --locale LOCALE            Evaluation locale (default: runtime locale)
@@ -38,8 +41,8 @@ Options:
   --run-id ID                Supply a run identifier (default: generated UUID)
   --help                     Show this help
 
-The adapter protocol and result provenance requirements are documented in the
-package README. Adapter stderr is never copied into result artifacts.`;
+The adapter protocol and result provenance requirements are documented in
+docs/routing-evaluations.md. Adapter stderr is never copied into result artifacts.`;
 
 function requiredValue(args, index, option, { allowOption = false } = {}) {
   const value = args[index + 1];
@@ -65,7 +68,7 @@ function parseArgs(args) {
     timeoutMs: 120_000,
     minimumScore: 1,
     locale: Intl.DateTimeFormat().resolvedOptions().locale || "und",
-    root: process.cwd(),
+    root: packageRoot,
   };
 
   for (let index = 0; index < args.length; index += 1) {

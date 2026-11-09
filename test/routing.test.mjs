@@ -3,17 +3,17 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
-import { loadRoutingSuite } from "../src/corpus.mjs";
+import { loadRoutingSuite } from "../src/routing/corpus.mjs";
 import {
   runEvaluation,
   scoreRoutingResult,
   summarizeResults,
   validateAdapterResult,
-} from "../src/evaluator.mjs";
-import { createProcessAdapter } from "../src/process-adapter.mjs";
+} from "../src/routing/evaluator.mjs";
+import { createProcessAdapter } from "../src/routing/process-adapter.mjs";
 
-const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const repositoryRoot = resolve(packageRoot, "..", "..");
+const testRoot = dirname(fileURLToPath(import.meta.url));
+const repositoryRoot = resolve(testRoot, "..");
 
 test("loads every committed skill, agent, and routing case", async () => {
   const suite = await loadRoutingSuite({ root: repositoryRoot });
@@ -42,7 +42,7 @@ test("executes a host adapter and summarizes provenance", async () => {
     if (wanted.delete(testCase.case_type)) cases.push(testCase);
     if (wanted.size === 0) break;
   }
-  const fixture = join(packageRoot, "fixtures", "passing-adapter.mjs");
+  const fixture = join(testRoot, "fixtures", "passing-routing-adapter.mjs");
   const { runId, records } = await runEvaluation({
     suite,
     cases,

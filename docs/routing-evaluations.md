@@ -1,4 +1,4 @@
-# `@inttegro/routing-evals`
+# Routing evaluations
 
 Run Inttegro's versioned skill and agent routing corpus through a real model or
 host without coupling the public repository to one provider SDK.
@@ -13,7 +13,7 @@ same corpus, scoring rules, provenance fields, and JSONL output.
 From the Inttegro AI repository:
 
 ```bash
-node packages/routing-evals/bin/inttegro-routing-eval.mjs \
+npx @inttegro/ai eval routing \
   --adapter node \
   --adapter-arg /absolute/path/to/your-host-adapter.mjs \
   --provider anthropic \

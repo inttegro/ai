@@ -3,7 +3,7 @@ import { runDoctor } from "./doctor.mjs";
 const help = `Inttegro MCP doctor
 
 Usage:
-  inttegro-mcp-doctor [options]
+  inttegro-ai doctor [options]
 
 Options:
   --endpoint URL       MCP endpoint (default: https://mcp.inttegro.com/)
@@ -71,7 +71,7 @@ function renderText(report) {
   return lines.join("\n");
 }
 
-export async function main(args) {
+export async function main(args, { version = "source" } = {}) {
   const options = parseArgs(args);
   if (options.help) {
     console.log(help);
@@ -88,6 +88,7 @@ export async function main(args) {
     token,
     tokenSource: options.tokenEnv,
     timeoutMs: options.timeoutMs,
+    clientInfo: { name: "inttegro-ai", version },
   });
 
   console.log(options.json ? JSON.stringify(report, null, 2) : renderText(report));

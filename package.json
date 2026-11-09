@@ -1,0 +1,48 @@
+{
+  "name": "@inttegro/ai",
+  "version": "0.1.0",
+  "description": "Inttegro AI command-line tools for MCP diagnostics and routing evaluations.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inttegro/ai.git"
+  },
+  "homepage": "https://github.com/inttegro/ai",
+  "bugs": {
+    "url": "https://github.com/inttegro/ai/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "inttegro-ai": "./bin/inttegro-ai.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "CHANGELOG.md",
+    "docs/mcp-doctor.md",
+    "docs/routing-evaluations.md",
+    "evals/routing.json",
+    "plugins/inttegro/agents/*.md",
+    "plugins/inttegro/skills/*/SKILL.md",
+    "products/*/skills/*/SKILL.md"
+  ],
+  "scripts": {
+    "check": "node --check bin/inttegro-ai.mjs && node --check src/cli.mjs && node --check src/doctor/cli.mjs && node --check src/doctor/doctor.mjs && node --check src/routing/cli.mjs && node --check src/routing/corpus.mjs && node --check src/routing/evaluator.mjs && node --check src/routing/process-adapter.mjs",
+    "test": "node --test test/*.test.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "inttegro",
+    "commerce",
+    "mcp",
+    "oauth",
+    "agents",
+    "evaluations"
+  ]
+}

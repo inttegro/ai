@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { afterEach, test } from "node:test";
 
-import { runDoctor } from "../src/doctor.mjs";
+import { runDoctor } from "../src/doctor/doctor.mjs";
 
 const servers = [];
 

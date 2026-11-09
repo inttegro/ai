@@ -13,8 +13,7 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 | [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with live Inttegro tools, eight developer skills, twelve internal merchant workflows, ten specialist agents, and MCP Apps metadata. | Public source; directory reviews pending |
 | [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
-| [`@inttegro/mcp-doctor`](packages/mcp-doctor) | Read-only OAuth, endpoint protection, and authenticated tool-catalog diagnostics. | Available from source |
-| [`@inttegro/routing-evals`](packages/routing-evals) | Provider-neutral execution and scoring for the versioned skill and agent routing corpus. | Available from source |
+| [`@inttegro/ai`](package.json) | One CLI for read-only MCP diagnostics and maintainer routing evaluations. | Source release |
 | [Shop with Inttegro](products/shop-with-inttegro) | Consumer product discovery, authoritative product hydration, secure Checkout handoff, and minimized purchase status. | Activation-gated; not installable yet |
 | [AI evaluation contracts](evals) | Versioned skill and agent routing cases plus MCP profile tool-coverage gates. | Enforced in CI |
 
@@ -47,6 +46,19 @@ flow. The tools then operate on the organization selected during authorization.
 See the [connection guide](plugins/inttegro/README.md) for supported client
 packages and usage guidance.
 
+### Diagnose an MCP connection
+
+The single `@inttegro/ai` package provides the public command-line surface:
+
+```bash
+npx @inttegro/ai doctor
+```
+
+Use a short-lived test-organization OAuth token with `--token-env` when the
+diagnostic report must include authenticated tool discovery. The CLI never
+accepts a token value as an argument and never invokes a merchant tool. See the
+[MCP doctor guide](docs/mcp-doctor.md) for the complete options.
+
 ## Install Inttegro skills
 
 Install the full Inttegro developer skill collection with the open-source `skills` CLI:
@@ -77,7 +89,7 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 - `plugins/` — installable agent plugins and their host manifests.
 - `products/` — product-level AI experiences and their activation contracts.
 - `skills/` — public developer skills for building and maintaining Inttegro integrations.
-- `packages/` — libraries and protocol adapters suitable for independent versioning.
+- `bin/` and `src/` — the single `@inttegro/ai` command-line package.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
 - `contracts/` — versioned MCP profile and capability contracts.
 - `evals/` — routing and tool-coverage evaluation inputs.

@@ -52,7 +52,7 @@ function summarize(checks) {
   );
 }
 
-async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeoutMs, checks }) {
+async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeoutMs, checks, clientInfo }) {
   const initialize = await request(
     fetchImpl,
     endpoint,
@@ -64,7 +64,7 @@ async function inspectAuthenticatedCatalog({ fetchImpl, endpoint, token, timeout
         {
           protocolVersion,
           capabilities: {},
-          clientInfo: { name: "inttegro-mcp-doctor", version: "0.1.0" },
+          clientInfo,
         },
         1,
       ),
@@ -168,6 +168,7 @@ export async function runDoctor({
   tokenSource,
   timeoutMs = 10_000,
   fetchImpl = fetch,
+  clientInfo = { name: "inttegro-ai", version: "source" },
 } = {}) {
   const checks = [];
   let catalog;
@@ -285,7 +286,7 @@ export async function runDoctor({
           {
             protocolVersion,
             capabilities: {},
-            clientInfo: { name: "inttegro-mcp-doctor", version: "0.1.0" },
+            clientInfo,
           },
           1,
         ),
@@ -321,6 +322,7 @@ export async function runDoctor({
         token,
         timeoutMs,
         checks,
+        clientInfo,
       });
     } catch (error) {
       checks.push(

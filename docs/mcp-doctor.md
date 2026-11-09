@@ -1,6 +1,6 @@
 # Inttegro MCP doctor
 
-`inttegro-mcp-doctor` performs read-only checks against an Inttegro MCP endpoint:
+`inttegro-ai doctor` performs read-only checks against an Inttegro MCP endpoint:
 
 - HTTPS and protected-resource metadata availability.
 - Advertised authorization servers and OAuth scopes.
@@ -11,10 +11,10 @@
 It never invokes a merchant tool. It accepts an OAuth token only through a
 named environment variable and excludes the token from its report.
 
-## Run from source
+## Run
 
 ```bash
-node packages/mcp-doctor/bin/inttegro-mcp-doctor.mjs
+npx @inttegro/ai doctor
 ```
 
 To include the authenticated catalog, use a short-lived token belonging to a
@@ -22,7 +22,7 @@ non-production test organization:
 
 ```bash
 INTTEGRO_TEST_TOKEN=replace_me \
-  node packages/mcp-doctor/bin/inttegro-mcp-doctor.mjs \
+  npx @inttegro/ai doctor \
   --token-env INTTEGRO_TEST_TOKEN
 ```
 
@@ -35,8 +35,8 @@ issue.
 ## Develop
 
 ```bash
-npm --prefix packages/mcp-doctor run check
-npm --prefix packages/mcp-doctor test
+npm run check
+npm test
 ```
 
 The package has no runtime dependencies and requires Node.js 22 or newer.

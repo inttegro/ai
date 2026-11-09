@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 
+
 const outcomes = new Set(["selected", "clarified", "refused", "error"]);
 const usageSources = new Set(["provider", "host", "unavailable"]);
 const semanticOutcomes = new Set(["success", "partial", "failure", "not_applicable"]);
