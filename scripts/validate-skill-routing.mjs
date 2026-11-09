@@ -74,13 +74,29 @@ function validateCases(kind, actualNames, entries) {
 }
 
 assert(corpus.schema_version === 1, "routing corpus must use schema_version 1");
-validateCases("skills", await skillNames(), corpus.skills);
-validateCases("agents", await agentNames(), corpus.agents);
+const routedSkills = await skillNames();
+const routedAgents = await agentNames();
+validateCases("skills", routedSkills, corpus.skills);
+validateCases("agents", routedAgents, corpus.agents);
 
 assert(Array.isArray(corpus.overlap_cases) && corpus.overlap_cases.length >= 6, "routing corpus needs overlap cases");
+const routableNames = new Set([...routedSkills, ...routedAgents]);
+const overlapPrompts = new Set();
 for (const entry of corpus.overlap_cases) {
   assert(typeof entry.prompt === "string" && entry.prompt.length >= 12, "overlap case needs a prompt");
   assert(Array.isArray(entry.expected) && entry.expected.length > 0, "overlap case needs expected routes");
+  assert(
+    new Set(entry.expected).size === entry.expected.length,
+    `overlap case repeats a route: ${entry.prompt}`,
+  );
+  const unknownRoutes = entry.expected.filter((name) => !routableNames.has(name));
+  assert(
+    unknownRoutes.length === 0,
+    `overlap case references unknown routes: ${unknownRoutes.join(", ")}`,
+  );
   assert(typeof entry.reason === "string" && entry.reason.length >= 12, "overlap case needs a reason");
+  const normalizedPrompt = entry.prompt.trim().toLowerCase();
+  assert(!overlapPrompts.has(normalizedPrompt), `overlap prompt is duplicated: ${entry.prompt}`);
+  overlapPrompts.add(normalizedPrompt);
 }
 console.log(`overlap: ${corpus.overlap_cases.length} catalog boundary cases`);

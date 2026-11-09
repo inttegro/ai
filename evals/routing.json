@@ -256,6 +256,18 @@
   ],
   "agents": [
     {
+      "name": "catalog-operations-manager",
+      "should_trigger": [
+        "Delegate creation of this product and price, publish it after approval, and create its first hosted buy link."
+      ],
+      "should_not_trigger": [
+        "Create an order for this customer and attempt payment using their selected masked method."
+      ],
+      "ambiguous": [
+        "Have a specialist clean up and publish the catalog records needed for this offer."
+      ]
+    },
+    {
       "name": "commerce-analyst",
       "should_trigger": [
         "Delegate a read-only multi-source analysis of sales, balances, payouts, and message performance."
@@ -292,6 +304,42 @@
       ]
     },
     {
+      "name": "file-operations-manager",
+      "should_trigger": [
+        "Delegate upload of this selected document, verify its scan state, create one public link, and revoke it later."
+      ],
+      "should_not_trigger": [
+        "Send the finalized order invoice to the order's saved customer channels."
+      ],
+      "ambiguous": [
+        "Have a specialist securely store and share this customer document."
+      ]
+    },
+    {
+      "name": "finance-reconciliation-specialist",
+      "should_trigger": [
+        "Delegate a read-only reconciliation across this balance, its transactions, the payout, and related refund states."
+      ],
+      "should_not_trigger": [
+        "Cancel this pending refund and then attempt a new payment."
+      ],
+      "ambiguous": [
+        "Have a finance specialist explain where these funds are and what evidence is missing."
+      ]
+    },
+    {
+      "name": "messaging-operations-manager",
+      "should_trigger": [
+        "Delegate creation, preview, publication, and one-customer delivery of this reusable order notification template."
+      ],
+      "should_not_trigger": [
+        "Send a bulk campaign to every customer who bought this product."
+      ],
+      "ambiguous": [
+        "Have a messaging specialist prepare and deliver this reusable customer notification safely."
+      ]
+    },
+    {
       "name": "order-operations-manager",
       "should_trigger": [
         "Delegate an order queue to amend drafts, finalize, send invoices, complete fulfilled orders, and send receipts."
@@ -301,6 +349,18 @@
       ],
       "ambiguous": [
         "Have an operator clear the routine order work waiting today."
+      ]
+    },
+    {
+      "name": "revenue-recovery-manager",
+      "should_trigger": [
+        "Delegate a bounded unpaid-order queue, let me select candidates, then send approved reminders or attempt selected payments."
+      ],
+      "should_not_trigger": [
+        "Automatically charge every customer with an outstanding order and message failures."
+      ],
+      "ambiguous": [
+        "Have a specialist recover the unpaid orders that need careful merchant review."
       ]
     },
     {
@@ -375,6 +435,38 @@
         "debug"
       ],
       "reason": "Connection setup and evidence-led failure diagnosis are both explicitly requested."
+    },
+    {
+      "prompt": "Create and publish a new product and price, then prepare the link used to sell it.",
+      "expected": [
+        "launch-offer",
+        "catalog-operations-manager"
+      ],
+      "reason": "The merchant skill guides the workflow while the specialist can own the multi-record catalog outcome."
+    },
+    {
+      "prompt": "Investigate an unpaid-order queue, then contact or charge only the entries I explicitly select.",
+      "expected": [
+        "collect-unpaid-orders",
+        "revenue-recovery-manager"
+      ],
+      "reason": "The recovery skill and delegated operator share the same bounded, approval-driven accounts-receivable outcome."
+    },
+    {
+      "prompt": "Explain overall business performance, with a focused reconciliation of the balance and payout discrepancy.",
+      "expected": [
+        "commerce-analyst",
+        "finance-reconciliation-specialist"
+      ],
+      "reason": "Broad operating analysis and a deep read-only finance reconciliation need different specialist scopes."
+    },
+    {
+      "prompt": "Draft and preview a reusable customer template, publish it, and send it to one selected customer.",
+      "expected": [
+        "message-templates",
+        "messaging-operations-manager"
+      ],
+      "reason": "The workflow skill defines the safe steps while the specialist owns the approved multi-step delivery outcome."
     }
   ]
 }

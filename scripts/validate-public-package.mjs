@@ -236,10 +236,15 @@ const agents = (await readdir(join(root, "plugins", "inttegro", "agents"), { wit
   .map((entry) => entry.name)
   .sort();
 const requiredAgents = [
+  "catalog-operations-manager.md",
   "commerce-analyst.md",
   "customer-journey-investigator.md",
   "customer-resolution-specialist.md",
+  "file-operations-manager.md",
+  "finance-reconciliation-specialist.md",
+  "messaging-operations-manager.md",
   "order-operations-manager.md",
+  "revenue-recovery-manager.md",
   "sales-closer.md",
 ];
 assert(
@@ -252,6 +257,24 @@ for (const agent of agents) {
   const expectedName = agent.slice(0, -3);
   assert(source.startsWith("---\n"), `${agent} must start with YAML frontmatter`);
   assert(source.includes(`\nname: ${expectedName}\n`), `${agent} name must match its filename`);
+  assert(source.includes("\nmodel: inherit\n"), `${agent} must inherit the host model`);
+  assert(/^maxTurns: \d+$/m.test(source), `${agent} must bound its turn count`);
+
+  const toolNames = [...source.matchAll(/mcp__plugin_inttegro_inttegro__([a-z0-9_]+)/g)]
+    .map((match) => match[1]);
+  assert(toolNames.length > 0, `${agent} must declare a least-privilege tool set`);
+  assert(
+    new Set(toolNames).size === toolNames.length,
+    `${agent} must not declare a tool more than once`,
+  );
+  const merchantTools = new Set(
+    (await readJson("contracts/inttegro-mcp-tools.json")).profiles.merchant.tools,
+  );
+  const unknownTools = toolNames.filter((tool) => !merchantTools.has(tool));
+  assert(
+    unknownTools.length === 0,
+    `${agent} references unknown tools: ${unknownTools.join(", ")}`,
+  );
 }
 
 console.log(
