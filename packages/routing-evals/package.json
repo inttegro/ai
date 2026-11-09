@@ -1,0 +1,29 @@
+{
+  "name": "@inttegro/routing-evals",
+  "version": "0.1.0",
+  "description": "Provider-neutral routing evaluations for Inttegro skills, agents, and plugin hosts.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inttegro/ai.git",
+    "directory": "packages/routing-evals"
+  },
+  "homepage": "https://github.com/inttegro/ai/tree/master/packages/routing-evals",
+  "bin": {
+    "inttegro-routing-eval": "./bin/inttegro-routing-eval.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node --check bin/inttegro-routing-eval.mjs && node --check src/cli.mjs && node --check src/corpus.mjs && node --check src/evaluator.mjs && node --check src/process-adapter.mjs",
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

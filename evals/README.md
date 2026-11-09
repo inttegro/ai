@@ -43,14 +43,35 @@ node scripts/validate-tool-coverage.mjs \
 The doctor never invokes a tool and never includes the token in its report.
 Use an account and OAuth client whose expected profile matches `--profile`.
 
-## Model evaluation
+## Execute the model evaluation
 
-Host-specific runners should load `routing.json`, expose only the unit under
-test and its real neighboring units, and record whether the host activates or
-delegates as expected. Score the ambiguous cases separately: some correctly
-require a brief clarification, while the overlap cases declare when more than
-one route is expected.
+`@inttegro/routing-evals` runs this corpus through a provider- or host-specific
+adapter and produces a consistent JSONL artifact:
 
-Do not report static validation as model-evaluation evidence. Record provider,
-model, host version, plugin revision, locale, execution region, token usage,
-latency, selected units, tool sequence, and semantic outcome for every run.
+```bash
+node packages/routing-evals/bin/inttegro-routing-eval.mjs \
+  --adapter node \
+  --adapter-arg /absolute/path/to/your-host-adapter.mjs \
+  --provider your-provider \
+  --model your-model \
+  --host your-host \
+  --host-version your-host-version \
+  --plugin-revision "$(git rev-parse HEAD)" \
+  --execution-region not_recorded \
+  --output /tmp/inttegro-routing-eval.jsonl
+```
+
+The runner supplies the full installed skill and agent catalog so the host is
+tested under realistic routing pressure. It scores positive, negative,
+ambiguous, and exact overlap cases, records repetitions, and exits nonzero when
+the configured minimum score is missed or an adapter fails. See the
+[package protocol](../packages/routing-evals/README.md) before implementing an
+adapter.
+
+Do not report static validation as model-evaluation evidence. Every executable
+run records provider, model, host version, plugin revision, locale, execution
+region, token-usage provenance, wall and model latency, selected units, tool
+sequence, tool latency, and semantic outcome. Unavailable measurements remain
+explicitly `null`; the runner never converts missing evidence into zero. Do not
+store chain-of-thought, credentials, customer data, or raw production tool
+payloads in evaluation artifacts.

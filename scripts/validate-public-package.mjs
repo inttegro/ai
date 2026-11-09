@@ -69,6 +69,26 @@ assert(
   "registry metadata must advertise the canonical Streamable HTTP endpoint",
 );
 
+const routingEvals = await readJson("packages/routing-evals/package.json");
+assert(routingEvals.name === "@inttegro/routing-evals", "routing eval package name must be stable");
+assert(routingEvals.version === "0.1.0", "routing eval package version must match its source release");
+assert(
+  routingEvals.bin?.["inttegro-routing-eval"] === "./bin/inttegro-routing-eval.mjs",
+  "routing eval package must expose inttegro-routing-eval",
+);
+assert(routingEvals.engines?.node === ">=22", "routing eval package must require Node 22 or newer");
+for (const path of [
+  "packages/routing-evals/README.md",
+  "packages/routing-evals/LICENSE",
+  "packages/routing-evals/bin/inttegro-routing-eval.mjs",
+  "packages/routing-evals/src/cli.mjs",
+  "packages/routing-evals/src/corpus.mjs",
+  "packages/routing-evals/src/evaluator.mjs",
+  "packages/routing-evals/src/process-adapter.mjs",
+]) {
+  assert((await stat(join(root, path)).catch(() => null))?.isFile(), `routing eval package is missing ${path}`);
+}
+
 const skills = [];
 for (const entry of await readdir(join(root, "skills"), { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;

@@ -30,6 +30,11 @@ jobs:
         run: |
           npm --prefix packages/mcp-doctor run check
           npm --prefix packages/mcp-doctor test
+      - name: Test routing evaluation runner
+        run: |
+          npm --prefix packages/routing-evals run check
+          npm --prefix packages/routing-evals test
+          npm --prefix packages/routing-evals run pack:check
       - name: Validate Claude marketplace
         run: npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
       - name: Validate Inttegro plugin

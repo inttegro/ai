@@ -26,6 +26,9 @@ node scripts/validate-public-package.mjs
 node scripts/sync-skills.mjs --check
 node scripts/validate-tool-coverage.mjs
 node scripts/validate-skill-routing.mjs
+npm --prefix packages/routing-evals run check
+npm --prefix packages/routing-evals test
+npm --prefix packages/routing-evals run pack:check
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate . --strict
 npx -y @anthropic-ai/claude-code@2.1.269 plugin validate plugins/inttegro --strict
 ```
@@ -52,6 +55,13 @@ redacted `mcp-doctor --json` report with the matching profile as documented in
 definition, not an installable plugin. Do not publish or list it until every
 gate in its `product.json` has passed and the reviewed provider OAuth client is
 allowlisted for the isolated consumer profile.
+
+Host-executed routing evidence belongs in a private or explicitly approved
+artifact location, not in this source repository. Use
+`@inttegro/routing-evals` to record the provider, model, host version, plugin
+revision, locale, region, token provenance, latency, selected units, tool
+sequence, and semantic outcome. Do not store chain-of-thought, credentials,
+customer data, or raw production tool payloads.
 
 Never commit credentials, access tokens, production exports, customer information, or private source copied from Inttegro services.
 
