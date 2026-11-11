@@ -25,12 +25,17 @@ The plugin never asks for raw card details, OTP codes, or an Inttegro API key in
 - Twelve authenticated merchant workflows marked internal so they ship with the plugin without appearing in skills.sh discovery.
 - Ten Claude specialists: read-only business, journey, and finance investigators plus action-capable catalog, revenue-recovery, messaging, file, sales, order-operations, and customer-resolution operators.
 - One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`; the
-  Claude-compatible `.mcp.json` also carries its registered public OAuth client.
+  portable `mcp.json` declares OpenAI's registered public OAuth client and the
+  Claude-compatible `.mcp.json` carries Claude's registered public OAuth client.
 - Compatibility metadata and artwork for Claude and OpenAI plugin hosts.
 
 ## Authentication
 
-Interactive users connect through OAuth 2.1. The MCP resource server advertises its authorization server and checks token audience, expiry, selected organization, membership, and tool scopes on every request. The packaged Claude connection is a public client that uses PKCE and a fixed localhost callback; it contains no client secret.
+Interactive users connect through OAuth 2.1. The MCP resource server advertises
+its authorization server and checks token audience, expiry, selected
+organization, membership, and tool scopes on every request. The packaged
+OpenAI and Claude connections use registered public clients with PKCE and
+host-specific callbacks; neither contains a client secret.
 
 ## Claude development
 

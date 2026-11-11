@@ -32,6 +32,7 @@
   "scripts": {
     "check": "node --check bin/inttegro-ai.mjs && node --check src/cli.mjs && node --check src/doctor/cli.mjs && node --check src/doctor/doctor.mjs && node --check src/routing/cli.mjs && node --check src/routing/corpus.mjs && node --check src/routing/evaluator.mjs && node --check src/routing/process-adapter.mjs",
     "test": "node --test test/*.test.mjs",
+    "package:openai": "node scripts/package-openai-plugin.mjs",
     "pack:check": "npm pack --dry-run"
   },
   "engines": {

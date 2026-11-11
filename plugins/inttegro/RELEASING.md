@@ -56,8 +56,18 @@ After the release commit has passed review:
 
 1. Push the exact reviewed commit.
 2. Create the intended signed tag or release entry.
-3. Submit or update each supported directory through its documented process.
-4. Record the resulting review, publication, or rejection state separately for
+3. Build the OpenAI upload from the portable source with the package name
+   assigned to the existing OpenAI listing:
+
+   ```bash
+   npm run package:openai -- \
+     --plugin-name app-6af210e6b2c48191a959ca7f07d41bc4
+   ```
+
+   The generated ZIP changes only the staged `plugin.json.name`; the portable
+   source remains `inttegro` for other hosts and directories.
+4. Submit or update each supported directory through its documented process.
+5. Record the resulting review, publication, or rejection state separately for
    every directory.
 
 Do not describe a directory as published merely because its repository points

@@ -55,6 +55,40 @@ for (const [field, expected] of Object.entries(requiredListingUrls)) {
     `OpenAI MCP review requires interface.${field} to be ${expected}`,
   );
 }
+const openAIReview = codexPlugin.extensions?.["com.openai"]?.review;
+assert(
+  openAIReview?.test_cases?.positive?.length === 5,
+  "OpenAI MCP review requires exactly five positive test cases",
+);
+assert(
+  openAIReview?.test_cases?.negative?.length === 3,
+  "OpenAI MCP review requires exactly three negative test cases",
+);
+for (const testCase of openAIReview.test_cases.positive) {
+  assert(
+    testCase.description &&
+      testCase.prompt &&
+      testCase.tools_triggered &&
+      testCase.expected_behavior,
+    "each positive OpenAI review case must describe its prompt, tools, and expected behavior",
+  );
+}
+for (const testCase of openAIReview.test_cases.negative) {
+  assert(
+    testCase.description && testCase.prompt,
+    "each negative OpenAI review case must describe its prompt and safety boundary",
+  );
+}
+assert(openAIReview.commerce === true, "OpenAI review must disclose commerce support");
+assert(
+  typeof openAIReview.commerce_description === "string" &&
+    openAIReview.commerce_description.length > 0,
+  "OpenAI review must explain the plugin's commerce behavior",
+);
+assert(
+  codexPlugin.extensions?.["com.openai"]?.publication?.release_notes,
+  "OpenAI submission must include release notes",
+);
 
 const mcp = await readJson("plugins/inttegro/mcp.json");
 assert(
@@ -66,6 +100,20 @@ assert(
     mcp.mcpServers.inttegro.url === "https://mcp.inttegro.com/",
   "portable plugin must use the canonical Inttegro Streamable HTTP endpoint",
 );
+const openAIAuth = mcp.mcpServers.inttegro.extensions?.["com.openai"]?.auth;
+assert(openAIAuth?.type === "oauth", "OpenAI submission must declare OAuth authentication");
+assert(
+  openAIAuth.client?.mode === "provided" &&
+    openAIAuth.client.clientId === "Xy429Gr0SW4zCUDB" &&
+    openAIAuth.client.tokenEndpointAuthMethod === "none",
+  "OpenAI submission must use the registered public Inttegro for ChatGPT OAuth client",
+);
+for (const scope of ["openid", "email", "commerce.mcp", "user:org:read"]) {
+  assert(
+    openAIAuth.baseScopes?.includes(scope),
+    `OpenAI submission OAuth base scopes must include ${scope}`,
+  );
+}
 
 const server = await readJson("registry/inttegro/server.json");
 assert(server.name === "com.inttegro/mcp", "registry namespace must be com.inttegro/mcp");

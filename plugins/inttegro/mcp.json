@@ -1,9 +1,27 @@
 {
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
-  "mcpServers": {
-    "inttegro": {
-      "type": "streamable-http",
-      "url": "https://mcp.inttegro.com/"
-    }
-  }
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+	"mcpServers": {
+		"inttegro": {
+			"type": "streamable-http",
+			"url": "https://mcp.inttegro.com/",
+			"extensions": {
+				"com.openai": {
+					"auth": {
+						"type": "oauth",
+						"client": {
+							"mode": "provided",
+							"clientId": "Xy429Gr0SW4zCUDB",
+							"tokenEndpointAuthMethod": "none"
+						},
+						"baseScopes": [
+							"openid",
+							"email",
+							"commerce.mcp",
+							"user:org:read"
+						]
+					}
+				}
+			}
+		}
+	}
 }
