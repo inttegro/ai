@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add headless MCP tool-call evaluations for names, arguments, ordering,
+  profile boundaries, recovery behavior, and write confirmations.
+- Publish synthetic behavioral cases for merchant, publication, and consumer
+  profiles with provider-neutral adapter and JSONL result contracts.
+
 ## 0.1.0 — 2026-11-09
 
 - Introduce the single `@inttegro/ai` command-line package.

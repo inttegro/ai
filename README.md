@@ -13,10 +13,10 @@ This repository is the public home for Inttegro agent plugins, reusable skills, 
 | [Inttegro agent plugin](plugins/inttegro) | Portable Agent Plugins package with live Inttegro tools, eight developer skills, twelve internal merchant workflows, ten specialist agents, and MCP Apps metadata. | Public source; directory reviews pending |
 | [Developer skills](skills) | Integration, Checkout, reliability, testing, debugging, upgrade, and MCP guidance for coding agents. | [Published on skills.sh](https://skills.sh/inttegro/ai) |
 | [MCP Registry metadata](registry) | Public discovery metadata for the hosted Inttegro MCP server. | Ready for namespace verification and publication |
-| [`@inttegro/ai`](package.json) | One CLI for read-only MCP diagnostics and maintainer routing evaluations. | Source release |
+| [`@inttegro/ai`](package.json) | One CLI for read-only MCP diagnostics, maintainer routing evaluations, and behavioral MCP tool-call evaluations. | Source release |
 | [Inttegro for Visual Studio Code](extensions/vscode) | Registers the hosted MCP server and provides connectivity and developer-navigation commands. | Source release |
 | [Shop with Inttegro](products/shop-with-inttegro) | Consumer product discovery, authoritative product hydration, secure Checkout handoff, and minimized purchase status. | Activation-gated; not installable yet |
-| [AI evaluation contracts](evals) | Versioned skill and agent routing cases plus MCP profile tool-coverage gates. | Enforced in CI |
+| [AI evaluation contracts](evals) | Versioned routing and behavioral tool-call cases plus MCP profile tool-coverage gates. | Enforced in CI |
 
 ## Inttegro MCP
 
@@ -60,6 +60,11 @@ diagnostic report must include authenticated tool discovery. The CLI never
 accepts a token value as an argument and never invokes a merchant tool. See the
 [MCP doctor guide](docs/mcp-doctor.md) for the complete options.
 
+Maintainers can run the provider-neutral behavioral corpus with
+`npx @inttegro/ai eval tools`. It grades observable MCP names, arguments,
+ordering, forbidden calls, and confirmation boundaries using synthetic
+fixtures. See the [tool-call evaluation protocol](docs/tool-call-evaluations.md).
+
 ## Install Inttegro skills
 
 Install the full Inttegro developer skill collection with the open-source `skills` CLI:
@@ -94,7 +99,7 @@ Then open `/mcp` in Claude Code and complete Inttegro sign-in.
 - `extensions/` — host-native developer integrations that add capabilities beyond a registry listing.
 - `examples/` — small, runnable examples built on public Inttegro interfaces.
 - `contracts/` — versioned MCP profile and capability contracts.
-- `evals/` — routing and tool-coverage evaluation inputs.
+- `evals/` — routing and MCP tool-call evaluation inputs.
 - `.claude-plugin/` and `.codex-plugin/` — marketplace metadata for supported hosts.
 - `registry/` — versioned discovery metadata for the official MCP Registry.
 - `scripts/` — dependency-free consistency and package validation.

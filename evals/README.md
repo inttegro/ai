@@ -1,14 +1,15 @@
 # Inttegro AI evaluations
 
-The public AI package treats routing and tool coverage as versioned contracts.
-These checks do not pretend to measure model quality by themselves; they make
-the expected behavior explicit and provide stable inputs for host-specific
-model evaluations.
+The public AI package treats routing, tool coverage, and behavioral MCP calls
+as versioned contracts. These checks do not pretend to measure model quality by
+themselves; they make expected behavior explicit and provide stable inputs for
+host-specific model evaluations.
 
 ## Static gates
 
 ```bash
 node scripts/validate-tool-coverage.mjs
+node scripts/validate-tool-call-evals.mjs
 node scripts/validate-skill-routing.mjs
 ```
 
@@ -18,6 +19,12 @@ referencing merchant tools.
 
 The routing check requires positive, negative, and ambiguous prompts for every
 skill and agent, plus cases that exercise the most easily confused boundaries.
+
+The tool-call check validates the synthetic behavioral corpus against every
+committed MCP profile and tool name. The corpus focuses on names, arguments,
+ordering, forbidden calls, recovery, and confirmation boundaries. It does not
+claim behavioral coverage for all 84 tools; the static workflow gate remains
+the exhaustive catalog check.
 
 Inside the Commerce workspace, compare the contract directly with the runtime
 source:
@@ -43,7 +50,7 @@ node scripts/validate-tool-coverage.mjs \
 The doctor never invokes a tool and never includes the token in its report.
 Use an account and OAuth client whose expected profile matches `--profile`.
 
-## Execute the model evaluation
+## Execute the model evaluations
 
 `@inttegro/ai` runs this corpus through a provider- or host-specific
 adapter and produces a consistent JSONL artifact:
@@ -68,10 +75,31 @@ the configured minimum score is missed or an adapter fails. See the
 [routing protocol](../docs/routing-evaluations.md) before implementing an
 adapter.
 
-Do not report static validation as model-evaluation evidence. Every executable
-run records provider, model, host version, plugin revision, locale, execution
-region, token-usage provenance, wall and model latency, selected units, tool
-sequence, tool latency, and semantic outcome. Unavailable measurements remain
-explicitly `null`; the runner never converts missing evidence into zero. Do not
-store chain-of-thought, credentials, customer data, or raw production tool
-payloads in evaluation artifacts.
+Run the MCP behavior corpus through a headless host adapter:
+
+```bash
+npx @inttegro/ai eval tools \
+  --adapter node \
+  --adapter-arg /absolute/path/to/your-host-adapter.mjs \
+  --provider your-provider \
+  --model your-model \
+  --host your-host \
+  --host-version your-host-version \
+  --plugin-revision "$(git rev-parse HEAD)" \
+  --execution-region not_recorded \
+  --output /tmp/inttegro-tool-call-eval.jsonl
+```
+
+The tool runner supplies the active profile's catalog and sanitized synthetic
+tool fixtures. It scores the observable transcript and final state without
+coupling the repository to a provider SDK. See the
+[tool-call protocol](../docs/tool-call-evaluations.md) before implementing an
+adapter.
+
+Do not report static validation or a passing fixture adapter as model-evaluation
+evidence. Every executable run records provider, model, host version, plugin
+revision, locale, execution region, token-usage provenance, wall and model
+latency, tool sequence, tool arguments, tool latency, and semantic outcome.
+Unavailable measurements remain explicitly `null`; the runner never converts
+missing evidence into zero. Do not store chain-of-thought, credentials,
+customer data, or raw production tool payloads in evaluation artifacts.

@@ -25,6 +25,7 @@ For the Inttegro agent plugin, run:
 node scripts/validate-public-package.mjs
 node scripts/sync-skills.mjs --check
 node scripts/validate-tool-coverage.mjs
+node scripts/validate-tool-call-evals.mjs
 node scripts/validate-skill-routing.mjs
 npm run check
 npm test
@@ -45,6 +46,12 @@ updated whenever a profile's tool catalog changes. Every tool needs compatible
 skill or agent coverage. Every skill and agent needs positive, negative, and
 ambiguous routing cases in `evals/routing.json`.
 
+High-risk MCP behavior belongs in `evals/tool-calls.json`. Use synthetic
+identifiers and minimal fixture responses, assert exact or subset arguments,
+and name forbidden calls explicitly. Behavioral cases should cover meaningful
+selection, sequencing, confirmation, profile-boundary, or recovery risks; they
+are not a substitute for the exhaustive static tool-coverage gate.
+
 When the private runtime source is available in the parent Commerce workspace,
 also run `node scripts/validate-tool-coverage.mjs --runtime-source
 ../mcp/src/tools/catalog.ts`. Before a release, compare an authenticated,
@@ -56,12 +63,13 @@ definition, not an installable plugin. Do not publish or list it until every
 gate in its `product.json` has passed and the reviewed provider OAuth client is
 allowlisted for the isolated consumer profile.
 
-Host-executed routing evidence belongs in a private or explicitly approved
-artifact location, not in this source repository. Use
-`npx @inttegro/ai eval routing` to record the provider, model, host version, plugin
-revision, locale, region, token provenance, latency, selected units, tool
-sequence, and semantic outcome. Do not store chain-of-thought, credentials,
-customer data, or raw production tool payloads.
+Host-executed routing and tool-call evidence belongs in a private or explicitly
+approved artifact location, not in this source repository. Use
+`npx @inttegro/ai eval routing` or `npx @inttegro/ai eval tools` to record the
+provider, model, host version, plugin revision, locale, region, token
+provenance, latency, observable selections or tool calls, and semantic outcome.
+Do not store chain-of-thought, credentials, customer data, or raw production
+tool payloads.
 
 Never commit credentials, access tokens, production exports, customer information, or private source copied from Inttegro services.
 

@@ -1,7 +1,7 @@
 {
   "name": "@inttegro/ai",
   "version": "0.1.0",
-  "description": "Inttegro AI command-line tools for MCP diagnostics and routing evaluations.",
+  "description": "Inttegro AI command-line tools for MCP diagnostics, routing evaluations, and tool-call evaluations.",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -24,13 +24,16 @@
     "CHANGELOG.md",
     "docs/mcp-doctor.md",
     "docs/routing-evaluations.md",
+    "docs/tool-call-evaluations.md",
+    "contracts/inttegro-mcp-tools.json",
     "evals/routing.json",
+    "evals/tool-calls.json",
     "plugins/inttegro/agents/*.md",
     "plugins/inttegro/skills/*/SKILL.md",
     "products/*/skills/*/SKILL.md"
   ],
   "scripts": {
-    "check": "node --check bin/inttegro-ai.mjs && node --check src/cli.mjs && node --check src/doctor/cli.mjs && node --check src/doctor/doctor.mjs && node --check src/routing/cli.mjs && node --check src/routing/corpus.mjs && node --check src/routing/evaluator.mjs && node --check src/routing/process-adapter.mjs",
+    "check": "node --check bin/inttegro-ai.mjs && node --check src/cli.mjs && node --check src/doctor/cli.mjs && node --check src/doctor/doctor.mjs && node --check src/routing/cli.mjs && node --check src/routing/corpus.mjs && node --check src/routing/evaluator.mjs && node --check src/routing/process-adapter.mjs && node --check src/tool-calls/cli.mjs && node --check src/tool-calls/corpus.mjs && node --check src/tool-calls/evaluator.mjs && node --check scripts/validate-tool-call-evals.mjs",
     "test": "node --test test/*.test.mjs",
     "package:openai": "node scripts/package-openai-plugin.mjs",
     "pack:check": "npm pack --dry-run"

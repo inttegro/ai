@@ -25,6 +25,7 @@ jobs:
           node scripts/validate-public-package.mjs
           node scripts/sync-skills.mjs --check
           node scripts/validate-tool-coverage.mjs
+          node scripts/validate-tool-call-evals.mjs
           node scripts/validate-skill-routing.mjs
       - name: Test Inttegro AI CLI
         run: |
