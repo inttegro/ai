@@ -17,9 +17,9 @@ const repositoryRoot = resolve(testRoot, "..");
 
 test("loads the versioned tool-call corpus and every MCP profile", async () => {
   const suite = await loadToolCallSuite({ root: repositoryRoot });
-  assert.equal(suite.cases.length, 19);
+  assert.equal(suite.cases.length, 22);
   assert.deepEqual(Object.keys(suite.profiles).sort(), ["consumer", "merchant", "publication"]);
-  assert.equal(suite.tools.length, 84);
+  assert.equal(suite.tools.length, 108);
   assert.equal(suite.cases.some((testCase) => testCase.category === "confirmation"), true);
   assert.equal(suite.cases.some((testCase) => testCase.category === "recovery"), true);
 });

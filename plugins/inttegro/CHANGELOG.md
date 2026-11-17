@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 — 2026-11-17
+
+- Add the 24 coupon, automatic-discount, promo, preview, order-application, and
+  campaign-audit tools to the committed merchant MCP contract.
+- Add a multi-turn incentives workflow with separate definition, publication,
+  order-repair, confirmation, verification, and historical-audit stages.
+- Add routing and tool-call evaluations for order incentive replacement,
+  campaign shutdown, and hypothetical total previews.
+
 ## 0.5.3 — 2026-11-09
 
 - Add the five positive and three negative OpenAI review cases required for an

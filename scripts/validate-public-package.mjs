@@ -251,6 +251,7 @@ const requiredMerchantWorkflows = [
   "daily-brief",
   "files",
   "fulfill-and-close",
+  "incentives",
   "launch-offer",
   "message-templates",
   "order-desk",
@@ -259,7 +260,7 @@ const requiredMerchantWorkflows = [
   "resolve-customer-case",
   "sell-by-link",
 ];
-assert(pluginSkills.length === 20, `expected 20 plugin skills, found ${pluginSkills.length}`);
+assert(pluginSkills.length === 21, `expected 21 plugin skills, found ${pluginSkills.length}`);
 assert(
   publicPluginSkills.every((skill) => pluginSkills.includes(skill)),
   `plugin is missing a shortened public skill name; found ${pluginSkills.join(", ")}`,

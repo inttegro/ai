@@ -23,7 +23,8 @@ skill and agent, plus cases that exercise the most easily confused boundaries.
 The tool-call check validates the synthetic behavioral corpus against every
 committed MCP profile and tool name. The corpus focuses on names, arguments,
 ordering, forbidden calls, recovery, and confirmation boundaries. It does not
-claim behavioral coverage for all 84 tools; the static workflow gate remains
+claim behavioral coverage for all 108 unique tools across the merchant,
+publication, and consumer profiles; the static workflow gate remains
 the exhaustive catalog check.
 
 Inside the Commerce workspace, compare the contract directly with the runtime

@@ -147,6 +147,7 @@ The initial corpus emphasizes boundaries with the highest cost of failure:
 - payment preparation, selected payment arguments, and ambiguous-result reconciliation;
 - refund option inspection, exact amounts and reasons, and confirmation;
 - message preview versus send or publish authority;
+- coupon, automatic-discount, promo, and order-incentive replacement boundaries;
 - order cancellation versus refunds and complete line-item replacement;
 - file-link revocation versus file deletion;
 - consumer hydration, checkout arguments, receipt capabilities, and profile isolation;

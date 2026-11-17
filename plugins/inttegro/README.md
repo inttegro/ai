@@ -11,6 +11,7 @@ permissioned Claude specialists, and portable MCP Apps metadata.
 - Create customers, orders, products, prices, and hosted buy links.
 - Take confirmed payments using masked saved-payment choices or secure Inttegro Checkout.
 - Guide line-item refunds from current availability through asynchronous reconciliation.
+- Plan, launch, preview, apply, stop, and audit coupon and automatic-discount campaigns without collapsing definitions, promos, and order calculations.
 - Create, preview, publish, archive, and safely send reusable SMS or email templates.
 - Upload, inspect, intentionally share, revoke, and delete files without exposing ordinary file bytes or reusable capability URLs in reads.
 - Produce credential-free SDK and checkout integration plans.
@@ -22,7 +23,7 @@ The plugin never asks for raw card details, OTP codes, or an Inttegro API key in
 
 - A root `plugin.json` and `mcp.json` using the portable Agent Plugins 1.0 format.
 - Eight public developer skills synchronized from the repository-root `skills/` directory.
-- Twelve authenticated merchant workflows marked internal so they ship with the plugin without appearing in skills.sh discovery.
+- Thirteen authenticated merchant workflows marked internal so they ship with the plugin without appearing in skills.sh discovery.
 - Ten Claude specialists: read-only business, journey, and finance investigators plus action-capable catalog, revenue-recovery, messaging, file, sales, order-operations, and customer-resolution operators.
 - One Streamable HTTP MCP connection to `https://mcp.inttegro.com/`; the
   portable `mcp.json` declares OpenAI's registered public OAuth client and the

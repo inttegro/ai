@@ -1,6 +1,6 @@
 {
 	"name": "inttegro",
-	"version": "0.5.3",
+	"version": "0.6.0",
 	"description": "Build Inttegro integrations and operate an authenticated merchant account with developer skills, internal workflows, confirmed actions, analytics, and portable MCP Apps views.",
 	"author": {
 		"name": "Inttegro",
@@ -37,7 +37,8 @@
 		"defaultPrompt": [
 			"Find unpaid orders and help me collect payment.",
 			"Close fulfilled orders and send their receipts.",
-			"Launch this offer with a verified buy link."
+			"Launch this offer with a verified buy link.",
+			"Set up this discount campaign and preview the resulting totals."
 		]
 	},
 	"extensions": {
@@ -95,7 +96,7 @@
 				"commerce_description": "Inttegro lets authenticated merchants inspect their own commerce records and take confirmed actions such as creating products and hosted buy links. Customer checkout happens on an Inttegro-hosted HTTPS page; the plugin does not expose card data or collect payment credentials in ChatGPT or Codex."
 			},
 			"publication": {
-				"release_notes": "Adds production OAuth review readiness, five positive and three negative reviewer cases, and corrected destructive-action metadata for customer updates."
+				"release_notes": "Adds multi-turn coupon, automatic-discount, promo, order-incentive, preview, and campaign-audit workflows alongside the complete 105-tool merchant catalog."
 			}
 		}
 	},

@@ -17,8 +17,8 @@ const repositoryRoot = resolve(testRoot, "..");
 
 test("loads every committed skill, agent, and routing case", async () => {
   const suite = await loadRoutingSuite({ root: repositoryRoot });
-  assert.equal(suite.units.length, 31);
-  assert.equal(suite.cases.length, 105);
+  assert.equal(suite.units.length, 32);
+  assert.equal(suite.cases.length, 110);
   assert.equal(suite.units.find((unit) => unit.name === "shop").kind, "skill");
   assert.equal(suite.units.find((unit) => unit.name === "revenue-recovery-manager").kind, "agent");
 });

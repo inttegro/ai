@@ -98,6 +98,18 @@
       ]
     },
     {
+      "name": "incentives",
+      "should_trigger": [
+        "Create a product-targeted automatic discount, publish its scheduled promo, preview the totals, and stop it after the campaign."
+      ],
+      "should_not_trigger": [
+        "Change this product's permanent price and publish the product."
+      ],
+      "ambiguous": [
+        "Set up a weekend offer and make sure it changes the right order totals."
+      ]
+    },
+    {
       "name": "integration",
       "should_trigger": [
         "Choose the right Inttegro API, SDK, Checkout, and MCP surfaces and build our first end-to-end workflow."
@@ -443,6 +455,21 @@
         "catalog-operations-manager"
       ],
       "reason": "The merchant skill guides the workflow while the specialist can own the multi-record catalog outcome."
+    },
+    {
+      "prompt": "Create and publish a new product and price, then launch a scheduled ten-percent automatic discount for it.",
+      "expected": [
+        "launch-offer",
+        "incentives"
+      ],
+      "reason": "Product and price setup belongs to offer launch, while discount definition, promo publication, and preview belong to incentives."
+    },
+    {
+      "prompt": "Inspect this draft order, replace its coupon set, and verify the recalculated incentives without changing its lines.",
+      "expected": [
+        "incentives"
+      ],
+      "reason": "The dedicated incentive tools own complete coupon replacement and verification without a broad order update."
     },
     {
       "prompt": "Investigate an unpaid-order queue, then contact or charge only the entries I explicitly select.",
